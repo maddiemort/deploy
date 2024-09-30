@@ -6,14 +6,14 @@
   imports = [
     ./configuration.nix
 
-    modules.hewwo
+    modules.five-blocks-apart
     modules.prometheus
     modules.promtail
     modules.tailscale
   ];
 
-  custom.services.hewwo = {
-    enable = false;
+  custom.services.five-blocks-apart = {
+    enable = true;
     memory = 6144;
   };
 

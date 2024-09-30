@@ -1,5 +1,6 @@
 {
   direwolf20 = import ./direwolf20.nix;
+  five-blocks-apart = import ./five-blocks-apart.nix;
   grafana = import ./grafana.nix;
   hewwo = import ./hewwo.nix;
   loki = import ./loki.nix;
