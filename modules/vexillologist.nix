@@ -143,8 +143,8 @@ in
 
       script = ''
         export RUST_LOG="info"
-        export DISCORD_TOKEN='$(cat "${config.age.secrets."${cfg.discordToken.name}".path}")'
-        export CONNECTION_STRING='$(cat "${config.age.secrets."${cfg.connectionString.name}".path}")'
+        export DISCORD_TOKEN="$(cat "${config.age.secrets."${cfg.discordToken.name}".path}")"
+        export CONNECTION_STRING="$(cat "${config.age.secrets."${cfg.connectionString.name}".path}")"
         ${pkgs.vexillologist}/bin/vexillologist
       '';
     };
