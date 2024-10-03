@@ -11,5 +11,6 @@
   promtail = import ./promtail.nix;
   tailscale = import ./tailscale.nix;
   tempo = import ./tempo.nix;
+  vexillologist = import ./vexillologist.nix;
   wirebrush = import ./wirebrush.nix;
 }

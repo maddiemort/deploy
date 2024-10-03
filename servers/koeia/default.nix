@@ -10,6 +10,7 @@
     modules.promtail
     modules.maddie-wtf
     modules.tailscale
+    modules.vexillologist
     modules.wirebrush
   ];
 
@@ -62,6 +63,10 @@
       name = "secrets/tailscale-koeia";
       file = ../../secrets/tailscale-koeia.age;
     };
+  };
+
+  custom.services.vexillologist = {
+    enable = true;
   };
 
   custom.services.wirebrush = {
