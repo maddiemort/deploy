@@ -27,6 +27,10 @@
     wirebrush.url = "github:gememma/wirebrush/main";
     wirebrush.inputs.nixpkgs.follows = "nixpkgs";
     wirebrush.inputs.flake-utils.follows = "flake-utils";
+
+    vexillologist.url = "github:maddiemort/vexillologist/v1.2.0";
+    vexillologist.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    vexillologist.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs =
@@ -70,6 +74,8 @@
           wirebrush = inputs.wirebrush.packages.${system}.wirebrush;
           wirebrush-content = inputs.wirebrush.packages.${system}.content;
           wirebrush-static = inputs.wirebrush.packages.${system}.static;
+
+          vexillologist = inputs.vexillologist.packages.${system}.default;
         })
       ];
 

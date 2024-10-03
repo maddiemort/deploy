@@ -7,12 +7,50 @@
 let
   cfg = config.custom.services.vexillologist;
 
-  inherit (lib) mkEnableOption mkIf mkOverride;
+  inherit (lib) mkEnableOption mkIf mkOverride mkOption types;
 in
 {
   options = {
     custom.services.vexillologist = {
       enable = mkEnableOption "Vexillologist Discord bot";
+
+      discordToken = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the Discord token for vexillologist, as
+                declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
+
+      connectionString = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the database connection string for
+                vexillologist, as declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
     };
   };
 
@@ -74,6 +112,40 @@ in
       initialScript = pkgs.writeText "postgres-init-script" ''
         GRANT ALL ON SCHEMA public TO vexillologist;
         GRANT ALL ON SCHEMA public TO vexillologist-dev;
+      '';
+    };
+
+
+    age.secrets."${cfg.discordToken.name}" = {
+      inherit (cfg.discordToken) file;
+      owner = "vexillologist";
+      group = "vexillologist";
+    };
+
+    age.secrets."${cfg.connectionString.name}" = {
+      inherit (cfg.connectionString) file;
+      owner = "vexillologist";
+      group = "vexillologist";
+    };
+
+    systemd.services.vexillologist = {
+      inherit (cfg) enable;
+
+      description = "Vexillologist Discord bot service";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+
+      serviceConfig = {
+        Restart = "always";
+        User = "vexillologist";
+        WorkingDirectory = "/srv/vexillologist";
+      };
+
+      script = ''
+        export RUST_LOG="info"
+        export DISCORD_TOKEN='$(cat "${config.age.secrets."${cfg.discordToken.name}".path}")'
+        export CONNECTION_STRING='$(cat "${config.age.secrets."${cfg.connectionString.name}".path}")'
+        ${pkgs.vexillologist}/bin/vexillologist
       '';
     };
   };

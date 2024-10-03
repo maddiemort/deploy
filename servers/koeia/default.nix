@@ -67,6 +67,14 @@
 
   custom.services.vexillologist = {
     enable = true;
+    connectionString = {
+      name = "secrets/vexillologist-connection-string";
+      file = ../../secrets/vexillologist-connection-string.age;
+    };
+    discordToken = {
+      name = "secrets/vexillologist-discord-token";
+      file = ../../secrets/vexillologist-discord-token.age;
+    };
   };
 
   custom.services.wirebrush = {

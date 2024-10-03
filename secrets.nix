@@ -14,6 +14,8 @@ let
     "secrets/tailscale-grafana.age".publicKeys = [ koeia ];
     "secrets/tailscale-koeia.age".publicKeys = [ koeia ];
     "secrets/tailscale-stribor.age".publicKeys = [ stribor ];
+    "secrets/vexillologist-connection-string.age".publicKeys = [ koeia ];
+    "secrets/vexillologist-discord-token.age".publicKeys = [ koeia ];
   };
 
   # Public keys of age-plugin-yubikey keys, the counterparts to the keygrips in
