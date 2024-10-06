@@ -40,8 +40,7 @@
     , ...
     } @ inputs:
     let
-      inherit (builtins) readDir;
-      inherit (nixpkgs.lib) const filterAttrs mapAttrs nixosSystem;
+      inherit (nixpkgs.lib) nixosSystem;
       inherit (flake-utils.lib) eachDefaultSystem;
 
       mkOverlays = system: [
