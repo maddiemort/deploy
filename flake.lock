@@ -335,17 +335,18 @@
         "onehalf": "onehalf"
       },
       "locked": {
-        "lastModified": 1727876061,
+        "lastModified": 1728231303,
         "narHash": "sha256-/pn1Q3UMSOpn3bVJ+vGBIT8VMaDXq/0KVeGubE9ROjY=",
-        "ref": "refs/heads/main",
-        "rev": "5813f6bc06d5a93152aaf536ed00d41c4b275f97",
-        "revCount": 5,
-        "type": "git",
-        "url": "ssh://git@github.com/maddiemort/maddie-wtf.git"
+        "owner": "maddiemort",
+        "repo": "maddie-wtf",
+        "rev": "3a845cd2336509826544c2f0019509103737d5f7",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/maddiemort/maddie-wtf.git"
+        "owner": "maddiemort",
+        "ref": "main",
+        "repo": "maddie-wtf",
+        "type": "github"
       }
     },
     "maddie-wtf-content": {
