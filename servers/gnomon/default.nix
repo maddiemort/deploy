@@ -33,4 +33,10 @@
       file = ../../secrets/tailscale-gnomon.age;
     };
   };
+
+  services.teamspeak3 = {
+    enable = true;
+    dataDir = "/srv/teamspeak3";
+    openFirewall = true;
+  };
 }
