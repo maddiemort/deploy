@@ -93,7 +93,6 @@ in
       script = ''
         export RUST_LOG="info"
         export DISCORD_TOKEN="$(cat "${config.age.secrets."${cfg.discordToken.name}".path}")"
-        export GITHUB_REPO_URL="https://github.com/maddiemort/arma-3-status-bot"
         export ARMA_QUERY_ADDR="$(cat "${config.age.secrets."${cfg.queryAddress.name}".path}")"
         ${pkgs.arma-3-status-bot}/bin/arma-3-status-bot -r
       '';
