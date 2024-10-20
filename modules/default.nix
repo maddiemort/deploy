@@ -1,4 +1,5 @@
 {
+  arma-3-status-bot = import ./arma-3-status-bot.nix;
   direwolf20 = import ./direwolf20.nix;
   five-blocks-apart = import ./five-blocks-apart.nix;
   grafana = import ./grafana.nix;

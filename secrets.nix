@@ -8,6 +8,8 @@ let
   stribor = readFile ./keys/stribor.pub;
 
   secrets = {
+    "secrets/arma-3-status-discord-token.age".publicKeys = [ gnomon ];
+    "secrets/arma-3-status-query-address.age".publicKeys = [ gnomon ];
     "secrets/grafana-admin-password.age".publicKeys = [ koeia ];
     "secrets/tailscale-atria.age".publicKeys = [ atria ];
     "secrets/tailscale-gnomon.age".publicKeys = [ gnomon ];

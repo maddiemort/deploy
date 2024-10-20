@@ -30,6 +30,10 @@
     vexillologist.url = "github:maddiemort/vexillologist/v1.2.0";
     vexillologist.inputs.nixpkgs.follows = "nixpkgs-unstable";
     vexillologist.inputs.flake-utils.follows = "flake-utils";
+
+    arma-3-status-bot.url = "github:maddiemort/arma-3-status-bot/main";
+    arma-3-status-bot.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    arma-3-status-bot.inputs.flake-utils.follows = "flake-utils";
   };
 
   outputs =
@@ -74,6 +78,8 @@
           wirebrush-static = inputs.wirebrush.packages.${system}.static;
 
           vexillologist = inputs.vexillologist.packages.${system}.default;
+
+          arma-3-status-bot = inputs.arma-3-status-bot.packages.${system}.default;
         })
       ];
 

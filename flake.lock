@@ -24,15 +24,41 @@
         "type": "github"
       }
     },
-    "cargo2nix": {
+    "arma-3-status-bot": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "cargo2nix": "cargo2nix",
+        "fenix": "fenix",
         "flake-utils": [
-          "maddie-wtf",
           "flake-utils"
         ],
         "nixpkgs": [
-          "maddie-wtf",
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729446502,
+        "narHash": "sha256-eaN9KTqt0cjeb7AksobrWZMiYHeZsZElvhp7GciQvYk=",
+        "owner": "maddiemort",
+        "repo": "arma-3-status-bot",
+        "rev": "8d479335bd3333cfa61cb3f6a52fe00d4ba05332",
+        "type": "github"
+      },
+      "original": {
+        "owner": "maddiemort",
+        "ref": "main",
+        "repo": "arma-3-status-bot",
+        "type": "github"
+      }
+    },
+    "cargo2nix": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "flake-utils": [
+          "arma-3-status-bot",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "arma-3-status-bot",
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
@@ -56,11 +82,11 @@
       "inputs": {
         "flake-compat": "flake-compat_3",
         "flake-utils": [
-          "vexillologist",
+          "maddie-wtf",
           "flake-utils"
         ],
         "nixpkgs": [
-          "vexillologist",
+          "maddie-wtf",
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay_2"
@@ -84,6 +110,34 @@
       "inputs": {
         "flake-compat": "flake-compat_4",
         "flake-utils": [
+          "vexillologist",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "vexillologist",
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_3"
+      },
+      "locked": {
+        "lastModified": 1713199118,
+        "narHash": "sha256-MlLdAvk+zXCFUy280sY6LqtykqWXIkKVXo72J7a6HlU=",
+        "owner": "cargo2nix",
+        "repo": "cargo2nix",
+        "rev": "1efb03f2f794ad5eed17e807e858c4da001dbc3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cargo2nix",
+        "ref": "main",
+        "repo": "cargo2nix",
+        "type": "github"
+      }
+    },
+    "cargo2nix_4": {
+      "inputs": {
+        "flake-compat": "flake-compat_5",
+        "flake-utils": [
           "wirebrush",
           "flake-utils"
         ],
@@ -91,7 +145,7 @@
           "wirebrush",
           "nixpkgs"
         ],
-        "rust-overlay": "rust-overlay_3"
+        "rust-overlay": "rust-overlay_4"
       },
       "locked": {
         "lastModified": 1682891040,
@@ -131,7 +185,7 @@
     },
     "deploy-rs": {
       "inputs": {
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -157,10 +211,32 @@
     "fenix": {
       "inputs": {
         "nixpkgs": [
-          "maddie-wtf",
+          "arma-3-status-bot",
           "nixpkgs"
         ],
         "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1706854869,
+        "narHash": "sha256-MUEwsK16OOG6/j0LZ0R0KhCcvJRKZHVXrBgLX7hZums=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "b03d2939685937a327f17df832bf9e8944ed9e3a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
+    "fenix_2": {
+      "inputs": {
+        "nixpkgs": [
+          "maddie-wtf",
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src_2"
       },
       "locked": {
         "lastModified": 1724135364,
@@ -176,13 +252,13 @@
         "type": "github"
       }
     },
-    "fenix_2": {
+    "fenix_3": {
       "inputs": {
         "nixpkgs": [
           "vexillologist",
           "nixpkgs"
         ],
-        "rust-analyzer-src": "rust-analyzer-src_2"
+        "rust-analyzer-src": "rust-analyzer-src_3"
       },
       "locked": {
         "lastModified": 1719124034,
@@ -198,13 +274,13 @@
         "type": "github"
       }
     },
-    "fenix_3": {
+    "fenix_4": {
       "inputs": {
         "nixpkgs": [
           "wirebrush",
           "nixpkgs"
         ],
-        "rust-analyzer-src": "rust-analyzer-src_3"
+        "rust-analyzer-src": "rust-analyzer-src_4"
       },
       "locked": {
         "lastModified": 1692944460,
@@ -271,6 +347,22 @@
     "flake-compat_4": {
       "flake": false,
       "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_5": {
+      "flake": false,
+      "locked": {
         "lastModified": 1650374568,
         "narHash": "sha256-Z+s0J8/r907g149rllvwhb4pKi8Wam5ij0st8PwAh+E=",
         "owner": "edolstra",
@@ -326,8 +418,8 @@
     },
     "maddie-wtf": {
       "inputs": {
-        "cargo2nix": "cargo2nix",
-        "fenix": "fenix",
+        "cargo2nix": "cargo2nix_2",
+        "fenix": "fenix_2",
         "flake-utils": [
           "flake-utils"
         ],
@@ -433,6 +525,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "arma-3-status-bot": "arma-3-status-bot",
         "deploy-rs": "deploy-rs",
         "flake-utils": "flake-utils",
         "maddie-wtf": "maddie-wtf",
@@ -450,6 +543,23 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
+        "lastModified": 1706797398,
+        "narHash": "sha256-UCKJaYBAjyOF7w6exlcPgU6Fp8+YGzMN3ID7rpzxAa8=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "850ba2fb6395cb39edef263256f7ba334f9142dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
+    "rust-analyzer-src_2": {
+      "flake": false,
+      "locked": {
         "lastModified": 1724088625,
         "narHash": "sha256-vgSBWgUKRyT0ZRZYj43GZkZzPEKgNodCuX/uofqlPsc=",
         "owner": "rust-lang",
@@ -464,7 +574,7 @@
         "type": "github"
       }
     },
-    "rust-analyzer-src_2": {
+    "rust-analyzer-src_3": {
       "flake": false,
       "locked": {
         "lastModified": 1719057472,
@@ -481,7 +591,7 @@
         "type": "github"
       }
     },
-    "rust-analyzer-src_3": {
+    "rust-analyzer-src_4": {
       "flake": false,
       "locked": {
         "lastModified": 1692775770,
@@ -501,12 +611,12 @@
     "rust-overlay": {
       "inputs": {
         "flake-utils": [
-          "maddie-wtf",
+          "arma-3-status-bot",
           "cargo2nix",
           "flake-utils"
         ],
         "nixpkgs": [
-          "maddie-wtf",
+          "arma-3-status-bot",
           "cargo2nix",
           "nixpkgs"
         ]
@@ -528,6 +638,33 @@
     "rust-overlay_2": {
       "inputs": {
         "flake-utils": [
+          "maddie-wtf",
+          "cargo2nix",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "maddie-wtf",
+          "cargo2nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1705112162,
+        "narHash": "sha256-IAM0+Uijh/fwlfoeDrOwau9MxcZW3zeDoUHc6Z3xfqM=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "9e0af26ffe52bf955ad5575888f093e41fba0104",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_3": {
+      "inputs": {
+        "flake-utils": [
           "vexillologist",
           "cargo2nix",
           "flake-utils"
@@ -552,7 +689,7 @@
         "type": "github"
       }
     },
-    "rust-overlay_3": {
+    "rust-overlay_4": {
       "inputs": {
         "flake-utils": [
           "wirebrush",
@@ -611,8 +748,8 @@
     },
     "vexillologist": {
       "inputs": {
-        "cargo2nix": "cargo2nix_2",
-        "fenix": "fenix_2",
+        "cargo2nix": "cargo2nix_3",
+        "fenix": "fenix_3",
         "flake-utils": [
           "flake-utils"
         ],
@@ -637,8 +774,8 @@
     },
     "wirebrush": {
       "inputs": {
-        "cargo2nix": "cargo2nix_3",
-        "fenix": "fenix_3",
+        "cargo2nix": "cargo2nix_4",
+        "fenix": "fenix_4",
         "flake-utils": [
           "flake-utils"
         ],
