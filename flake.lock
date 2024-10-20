@@ -427,16 +427,16 @@
         "onehalf": "onehalf"
       },
       "locked": {
-        "lastModified": 1728293447,
-        "narHash": "sha256-tq0D9uuez3OneB7/OjaezwChUpDNND15uB3fHea8yOU=",
+        "lastModified": 1729453127,
+        "narHash": "sha256-0AAkZ2FjLO3ae7DokkToveBUTuexWtKLitXl/1RG4HI=",
         "owner": "maddiemort",
         "repo": "maddie-wtf",
-        "rev": "559f32df10669b2954892b6c4697320fac242e0c",
+        "rev": "8baf00f83af98478ab6fa8edc1a5e9bdb91ea3a0",
         "type": "github"
       },
       "original": {
         "owner": "maddiemort",
-        "ref": "v0.1.0",
+        "ref": "v0.1.1",
         "repo": "maddie-wtf",
         "type": "github"
       }
@@ -444,11 +444,11 @@
     "maddie-wtf-content": {
       "flake": false,
       "locked": {
-        "lastModified": 1727875027,
-        "narHash": "sha256-BMhEglXMzTcHr4mmgj8loF5ACWmHJeEph7zpt+o1pso=",
+        "lastModified": 1729453309,
+        "narHash": "sha256-X13Tk/cRrSwv1Ll+MIW0P12hfX9fYfudrBl2F9vDnA8=",
         "ref": "refs/heads/main",
-        "rev": "f164aafbde478548b434241085066f3010eb4844",
-        "revCount": 1,
+        "rev": "6ff9bc30941f92183c57fc37ab1e48907996086e",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@github.com/maddiemort/maddie-wtf-content.git"
       },
