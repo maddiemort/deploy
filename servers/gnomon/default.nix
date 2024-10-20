@@ -36,7 +36,7 @@
 
   services.teamspeak3 = {
     enable = true;
-    dataDir = "/srv/teamspeak3";
+    dataDir = "/srv/teamspeak3-server";
     openFirewall = true;
   };
 }
