@@ -7,13 +7,13 @@
     ./configuration.nix
 
     modules.arma-3-status-bot
-    modules.five-blocks-apart
+    modules.mince-pie-raft
     modules.prometheus
     modules.promtail
     modules.tailscale
   ];
 
-  custom.services.five-blocks-apart = {
+  custom.services.mince-pie-raft = {
     enable = true;
     memory = 6144;
   };

@@ -6,6 +6,7 @@
   hewwo = import ./hewwo.nix;
   loki = import ./loki.nix;
   maddie-wtf = import ./maddie-wtf.nix;
+  mince-pie-raft = import ./mince-pie-raft.nix;
   pounce = import ./pounce.nix;
   prometheus = import ./prometheus.nix;
   prominence = import ./prominence.nix;
