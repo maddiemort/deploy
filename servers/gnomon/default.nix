@@ -15,7 +15,7 @@
 
   custom.services.mince-pie-raft = {
     enable = true;
-    memory = 6144;
+    memory = 12288;
   };
 
   custom.services.prometheus.nodeExporter.enable = true;
