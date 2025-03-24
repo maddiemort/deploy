@@ -18,6 +18,13 @@ let
     "secrets/tailscale-stribor.age".publicKeys = [ stribor ];
     "secrets/vexillologist-connection-string.age".publicKeys = [ koeia ];
     "secrets/vexillologist-discord-token.age".publicKeys = [ koeia ];
+    "secrets/zulip-database-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-memcached-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-noreply-hashed-password.age".publicKeys = [ atria ];
+    "secrets/zulip-noreply-password.age".publicKeys = [ koeia ];
+    "secrets/zulip-rabbitmq-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-redis-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-zulip-env.age".publicKeys = [ koeia ];
   };
 
   # Public keys of age-plugin-yubikey keys, the counterparts to the keygrips in

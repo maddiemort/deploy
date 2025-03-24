@@ -12,6 +12,7 @@
     modules.tailscale
     modules.vexillologist
     modules.wirebrush
+    modules.zulip
   ];
 
   custom.services.grafana = {
@@ -82,4 +83,6 @@
     domain = "gemmat.dev";
     acme.email = "gemtipper@gmail.com";
   };
+
+  custom.services.zulip.enable = true;
 }

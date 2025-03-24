@@ -1,4 +1,5 @@
-{ modules
+{ config
+, modules
 , ...
 }:
 
@@ -6,6 +7,7 @@
   imports = [
     ./configuration.nix
 
+    modules.mailserver
     modules.prometheus
     modules.promtail
     modules.tailscale
@@ -26,5 +28,32 @@
       name = "secrets/tailscale-atria";
       file = ../../secrets/tailscale-atria.age;
     };
+  };
+
+  age.secrets."secrets/zulip-noreply-hashed-password" = {
+    file = ../../secrets/zulip-noreply-hashed-password.age;
+    owner = "virtualMail";
+    group = "virtualMail";
+  };
+
+  security.acme.certs."mail.chat.maddie.wtf".email = "admin@maddie.wtf";
+
+  mailserver = {
+    enable = true;
+    fqdn = "mail.chat.maddie.wtf";
+    domains = [ "chat.maddie.wtf" ];
+
+    loginAccounts = {
+      "noreply@chat.maddie.wtf" = {
+        hashedPasswordFile = config.age.secrets."secrets/zulip-noreply-hashed-password".path;
+
+        aliases = [
+          "@chat.maddie.wtf"
+          "admin@maddie.wtf"
+        ];
+      };
+    };
+
+    certificateScheme = "acme-nginx";
   };
 }

@@ -15,4 +15,5 @@
   tempo = import ./tempo.nix;
   vexillologist = import ./vexillologist.nix;
   wirebrush = import ./wirebrush.nix;
+  zulip = import ./zulip.nix;
 }
