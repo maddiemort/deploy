@@ -6,6 +6,7 @@
   imports = [
     ./configuration.nix
 
+    modules.discourse
     modules.grafana
     modules.promtail
     modules.maddie-wtf
@@ -81,5 +82,28 @@
     enable = true;
     domain = "gemmat.dev";
     acme.email = "gemtipper@gmail.com";
+  };
+
+  custom.services.discourse = {
+    enable = true;
+
+    hostname = "forum.maddie.wtf";
+    title = "maddie, wtf?!";
+
+    acmeEmail = "admin@maddie.wtf";
+    adminEmail = "admin@maddie.wtf";
+
+    adminPassword = {
+      name = "secrets/discourse-admin-password";
+      file = ../../secrets/discourse-admin-password.age;
+    };
+    secretKeyBase = {
+      name = "secrets/discourse-secret-key-base";
+      file = ../../secrets/discourse-secret-key-base.age;
+    };
+    noreplyPassword = {
+      name = "secrets/discourse-noreply-password";
+      file = ../../secrets/discourse-noreply-password.age;
+    };
   };
 }

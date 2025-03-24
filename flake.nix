@@ -34,6 +34,11 @@
     arma-3-status-bot.url = "github:maddiemort/arma-3-status-bot/main";
     arma-3-status-bot.inputs.nixpkgs.follows = "nixpkgs-unstable";
     arma-3-status-bot.inputs.flake-utils.follows = "flake-utils";
+
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nixos-mailserver.inputs.nixpkgs-24_05.follows = "nixpkgs";
+    nixos-mailserver.inputs.utils.follows = "flake-utils";
   };
 
   outputs =
@@ -92,7 +97,9 @@
         ];
         specialArgs = {
           inherit inputs mkOverlays system;
-          modules = self.nixosModules;
+          modules = self.nixosModules // {
+            mailserver = inputs.nixos-mailserver.nixosModules.mailserver;
+          };
         };
       };
 

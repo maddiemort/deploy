@@ -10,6 +10,10 @@ let
   secrets = {
     "secrets/arma-3-status-discord-token.age".publicKeys = [ gnomon ];
     "secrets/arma-3-status-query-address.age".publicKeys = [ gnomon ];
+    "secrets/discourse-admin-password.age".publicKeys = [ koeia ];
+    "secrets/discourse-noreply-hashed-password.age".publicKeys = [ atria ];
+    "secrets/discourse-noreply-password.age".publicKeys = [ koeia ];
+    "secrets/discourse-secret-key-base.age".publicKeys = [ koeia ];
     "secrets/grafana-admin-password.age".publicKeys = [ koeia ];
     "secrets/tailscale-atria.age".publicKeys = [ atria ];
     "secrets/tailscale-gnomon.age".publicKeys = [ gnomon ];
