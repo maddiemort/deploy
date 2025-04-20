@@ -30,25 +30,26 @@
     };
   };
 
-  age.secrets."secrets/discourse-noreply-hashed-password" = {
-    file = ../../secrets/discourse-noreply-hashed-password.age;
+  age.secrets."secrets/zulip-noreply-hashed-password" = {
+    file = ../../secrets/zulip-noreply-hashed-password.age;
     owner = "virtualMail";
     group = "virtualMail";
   };
 
-  security.acme.certs."mail.forum.maddie.wtf".email = "admin@maddie.wtf";
+  security.acme.certs."mail.chat.maddie.wtf".email = "admin@maddie.wtf";
 
   mailserver = {
     enable = true;
-    fqdn = "mail.forum.maddie.wtf";
-    domains = [ "forum.maddie.wtf" ];
+    fqdn = "mail.chat.maddie.wtf";
+    domains = [ "chat.maddie.wtf" ];
 
     loginAccounts = {
-      "noreply@forum.maddie.wtf" = {
-        hashedPasswordFile = config.age.secrets."secrets/discourse-noreply-hashed-password".path;
+      "noreply@chat.maddie.wtf" = {
+        hashedPasswordFile = config.age.secrets."secrets/zulip-noreply-hashed-password".path;
 
         aliases = [
-          "@forum.maddie.wtf"
+          "@chat.maddie.wtf"
+          "admin@maddie.wtf"
         ];
       };
     };

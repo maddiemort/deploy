@@ -10,10 +10,6 @@ let
   secrets = {
     "secrets/arma-3-status-discord-token.age".publicKeys = [ gnomon ];
     "secrets/arma-3-status-query-address.age".publicKeys = [ gnomon ];
-    "secrets/discourse-admin-password.age".publicKeys = [ koeia ];
-    "secrets/discourse-noreply-hashed-password.age".publicKeys = [ atria ];
-    "secrets/discourse-noreply-password.age".publicKeys = [ koeia ];
-    "secrets/discourse-secret-key-base.age".publicKeys = [ koeia ];
     "secrets/grafana-admin-password.age".publicKeys = [ koeia ];
     "secrets/tailscale-atria.age".publicKeys = [ atria ];
     "secrets/tailscale-gnomon.age".publicKeys = [ gnomon ];
@@ -22,6 +18,13 @@ let
     "secrets/tailscale-stribor.age".publicKeys = [ stribor ];
     "secrets/vexillologist-connection-string.age".publicKeys = [ koeia ];
     "secrets/vexillologist-discord-token.age".publicKeys = [ koeia ];
+    "secrets/zulip-database-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-memcached-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-noreply-hashed-password.age".publicKeys = [ atria ];
+    "secrets/zulip-noreply-password.age".publicKeys = [ koeia ];
+    "secrets/zulip-rabbitmq-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-redis-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-zulip-env.age".publicKeys = [ koeia ];
   };
 
   # Public keys of age-plugin-yubikey keys, the counterparts to the keygrips in
