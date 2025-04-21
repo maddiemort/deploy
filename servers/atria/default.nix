@@ -51,7 +51,13 @@
           "@chat.maddie.wtf"
           "admin@maddie.wtf"
         ];
+
+        sendOnly = true;
       };
+    };
+
+    forwards = {
+      "admin@maddie.wtf" = "me@maddie.wtf";
     };
 
     certificateScheme = "acme-nginx";

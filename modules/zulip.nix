@@ -309,6 +309,7 @@ in
               SETTING_EMAIL_PORT = "587";
               SETTING_EMAIL_USE_SSL = "False";
               SETTING_EMAIL_USE_TLS = "True";
+              SETTING_NOREPLY_EMAIL_ADDRESS = "noreply@${cfg.hostname}";
               SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS = "True";
               SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS = "False";
               SETTING_PASSWORD_MIN_LENGTH = "20";
