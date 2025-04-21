@@ -113,5 +113,10 @@
       name = "secrets/zulip-zulip-env";
       file = ../../secrets/zulip-zulip-env.age;
     };
+
+    jitsi = {
+      enable = false;
+      hostname = "meet.maddie.wtf";
+    };
   };
 }
