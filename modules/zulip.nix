@@ -11,6 +11,111 @@ in
   options = {
     custom.services.zulip = {
       enable = mkEnableOption "Zulip server";
+
+      hostname = mkOption {
+        description = "The root hostname Zulip will be hosted on";
+        type = types.str;
+      };
+
+      adminEmail = mkOption {
+        description = "Email address for the administrator";
+        type = types.str;
+      };
+
+      databaseEnv = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the env file for the Zulip database
+                container, as declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
+
+      memcachedEnv = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the env file for the Zulip memcached
+                container, as declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
+
+      rabbitmqEnv = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the env file for the Zulip rabbitmq
+                container, as declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
+
+      redisEnv = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the env file for the Zulip redis container,
+                as declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
+
+      zulipEnv = mkOption {
+        type = types.submodule {
+          options = {
+            name = mkOption {
+              description = ''
+                Name of the agenix secret that contains the env file for the Zulip zulip container,
+                as declared to Age, without the .age extension.
+              '';
+              type = types.str;
+            };
+
+            file = mkOption {
+              type = types.path;
+              description = "Path to the encrypted Age secret";
+            };
+          };
+        };
+      };
     };
   };
 
@@ -18,7 +123,7 @@ in
     services.nginx = {
       enable = true;
 
-      virtualHosts."chat.maddie.wtf" = {
+      virtualHosts."${cfg.hostname}" = {
         enableACME = true;
         forceSSL = true;
 
@@ -35,34 +140,34 @@ in
     };
 
     security.acme.acceptTerms = true;
-    security.acme.certs."chat.maddie.wtf".email = "admin@maddie.wtf";
+    security.acme.certs."${cfg.hostname}".email = cfg.adminEmail;
 
-    age.secrets."secrets/zulip-database-env" = {
-      file = ../secrets/zulip-database-env.age;
+    age.secrets."${cfg.databaseEnv.name}" = {
+      inherit (cfg.databaseEnv) file;
       owner = "root";
       group = "root";
     };
 
-    age.secrets."secrets/zulip-memcached-env" = {
-      file = ../secrets/zulip-memcached-env.age;
+    age.secrets."${cfg.memcachedEnv.name}" = {
+      inherit (cfg.memcachedEnv) file;
       owner = "root";
       group = "root";
     };
 
-    age.secrets."secrets/zulip-rabbitmq-env" = {
-      file = ../secrets/zulip-rabbitmq-env.age;
+    age.secrets."${cfg.rabbitmqEnv.name}" = {
+      inherit (cfg.rabbitmqEnv) file;
       owner = "root";
       group = "root";
     };
 
-    age.secrets."secrets/zulip-redis-env" = {
-      file = ../secrets/zulip-redis-env.age;
+    age.secrets."${cfg.redisEnv.name}" = {
+      inherit (cfg.redisEnv) file;
       owner = "root";
       group = "root";
     };
 
-    age.secrets."secrets/zulip-zulip-env" = {
-      file = ../secrets/zulip-zulip-env.age;
+    age.secrets."${cfg.zulipEnv.name}" = {
+      inherit (cfg.zulipEnv) file;
       owner = "root";
       group = "root";
     };
@@ -86,7 +191,7 @@ in
           # Note that you need to do a manual `ALTER ROLE` query if you change this on a system
           # after booting the postgres container the first time on a host. Instructions are
           # available in README.md.
-          config.age.secrets."secrets/zulip-database-env".path
+          config.age.secrets."${cfg.databaseEnv.name}".path
         ];
 
         volumes = [
@@ -115,7 +220,7 @@ in
         };
 
         environmentFiles = [
-          config.age.secrets."secrets/zulip-memcached-env".path
+          config.age.secrets."${cfg.memcachedEnv.name}".path
         ];
       };
 
@@ -128,7 +233,7 @@ in
         };
 
         environmentFiles = [
-          config.age.secrets."secrets/zulip-rabbitmq-env".path
+          config.age.secrets."${cfg.rabbitmqEnv.name}".path
         ];
 
         volumes = [
@@ -150,7 +255,7 @@ in
         ];
 
         environmentFiles = [
-          config.age.secrets."secrets/zulip-redis-env".path
+          config.age.secrets."${cfg.redisEnv.name}".path
         ];
 
         volumes = [
@@ -182,10 +287,10 @@ in
           SETTING_RABBITMQ_HOST = "rabbitmq";
           SETTING_REDIS_HOST = "redis";
 
-          SETTING_EXTERNAL_HOST = "chat.maddie.wtf";
-          SETTING_ZULIP_ADMINISTRATOR = "admin@maddie.wtf";
-          SETTING_EMAIL_HOST = "mail.chat.maddie.wtf";
-          SETTING_EMAIL_HOST_USER = "noreply@chat.maddie.wtf";
+          SETTING_EXTERNAL_HOST = cfg.hostname;
+          SETTING_ZULIP_ADMINISTRATOR = cfg.adminEmail;
+          SETTING_EMAIL_HOST = "mail.${cfg.hostname}";
+          SETTING_EMAIL_HOST_USER = "noreply@${cfg.hostname}";
           SETTING_EMAIL_PORT = "587";
           SETTING_EMAIL_USE_SSL = "False";
           SETTING_EMAIL_USE_TLS = "True";
@@ -199,7 +304,7 @@ in
         };
 
         environmentFiles = [
-          config.age.secrets."secrets/zulip-zulip-env".path
+          config.age.secrets."${cfg.zulipEnv.name}".path
         ];
 
         volumes = [
