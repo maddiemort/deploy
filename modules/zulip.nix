@@ -297,26 +297,25 @@ in
               DB_HOST = "database";
               DB_HOST_PORT = "5432";
               DB_USER = "zulip";
+              LOADBALANCER_IPS = "157.90.147.15";
               SSL_CERTIFICATE_GENERATION = "self-signed";
-              SETTING_MEMCACHED_LOCATION = "memcached:11211";
-              SETTING_RABBITMQ_HOST = "rabbitmq";
-              SETTING_REDIS_HOST = "redis";
+              ZULIP_AUTH_BACKENDS = "EmailAuthBackend";
 
-              SETTING_EXTERNAL_HOST = cfg.hostname;
-              SETTING_ZULIP_ADMINISTRATOR = cfg.adminEmail;
+              SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS = "True";
               SETTING_EMAIL_HOST = "mail.${cfg.hostname}";
               SETTING_EMAIL_HOST_USER = "noreply@${cfg.hostname}";
               SETTING_EMAIL_PORT = "587";
               SETTING_EMAIL_USE_SSL = "False";
               SETTING_EMAIL_USE_TLS = "True";
+              SETTING_EXTERNAL_HOST = cfg.hostname;
+              SETTING_MEMCACHED_LOCATION = "memcached:11211";
               SETTING_NOREPLY_EMAIL_ADDRESS = "noreply@${cfg.hostname}";
-              SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS = "True";
-              SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS = "False";
-              SETTING_PASSWORD_MIN_LENGTH = "20";
               SETTING_PASSWORD_MAX_LENGTH = "128";
-              ZULIP_AUTH_BACKENDS = "EmailAuthBackend";
-
-              LOADBALANCER_IPS = "157.90.147.15";
+              SETTING_PASSWORD_MIN_LENGTH = "20";
+              SETTING_RABBITMQ_HOST = "rabbitmq";
+              SETTING_REDIS_HOST = "redis";
+              SETTING_ZULIP_ADMINISTRATOR = cfg.adminEmail;
+              SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS = "False";
             }
 
             (mkIf cfg.jitsi.enable {
