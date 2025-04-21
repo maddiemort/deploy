@@ -84,5 +84,34 @@
     acme.email = "gemtipper@gmail.com";
   };
 
-  custom.services.zulip.enable = true;
+  custom.services.zulip = {
+    enable = true;
+    hostname = "chat.maddie.wtf";
+    adminEmail = "admin@maddie.wtf";
+
+    databaseEnv = {
+      name = "secrets/zulip-database-env";
+      file = ../../secrets/zulip-database-env.age;
+    };
+
+    memcachedEnv = {
+      name = "secrets/zulip-memcached-env";
+      file = ../../secrets/zulip-memcached-env.age;
+    };
+
+    rabbitmqEnv = {
+      name = "secrets/zulip-rabbitmq-env";
+      file = ../../secrets/zulip-rabbitmq-env.age;
+    };
+
+    redisEnv = {
+      name = "secrets/zulip-redis-env";
+      file = ../../secrets/zulip-redis-env.age;
+    };
+
+    zulipEnv = {
+      name = "secrets/zulip-zulip-env";
+      file = ../../secrets/zulip-zulip-env.age;
+    };
+  };
 }
