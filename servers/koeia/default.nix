@@ -87,7 +87,7 @@
   custom.services.zulip = {
     enable = true;
     hostname = "chat.maddie.wtf";
-    adminEmail = "admin@maddie.wtf";
+    adminEmail = "admin@chat.maddie.wtf";
 
     databaseEnv = {
       name = "secrets/zulip-database-env";
