@@ -55,7 +55,7 @@
 
         aliasesRegexp = [
           "/^noreply-.*@chat\\.maddie\\.wtf$/"
-          "/^admin@maddie\\.wtf$/"
+          "/^admin@chat\\.maddie\\.wtf$/"
         ];
 
         sendOnly = true;
@@ -71,7 +71,7 @@
     };
 
     forwards = {
-      "admin@maddie.wtf" = "me@maddie.wtf";
+      "admin@chat.maddie.wtf" = "admin@maddie.wtf";
     };
 
     certificateScheme = "acme-nginx";
