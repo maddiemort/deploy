@@ -36,6 +36,12 @@
     group = "virtualMail";
   };
 
+  age.secrets."secrets/zulip-incoming-hashed-password" = {
+    file = ../../secrets/zulip-incoming-hashed-password.age;
+    owner = "virtualMail";
+    group = "virtualMail";
+  };
+
   security.acme.certs."mail.chat.maddie.wtf".email = "admin@maddie.wtf";
 
   mailserver = {
@@ -47,12 +53,20 @@
       "noreply@chat.maddie.wtf" = {
         hashedPasswordFile = config.age.secrets."secrets/zulip-noreply-hashed-password".path;
 
-        aliases = [
-          "@chat.maddie.wtf"
-          "admin@maddie.wtf"
+        aliasesRegexp = [
+          "/^noreply-.*@chat\\.maddie\\.wtf$/"
+          "/^admin@maddie\\.wtf$/"
         ];
 
         sendOnly = true;
+      };
+
+      "incoming@chat.maddie.wtf" = {
+        hashedPasswordFile = config.age.secrets."secrets/zulip-incoming-hashed-password".path;
+
+        aliasesRegexp = [
+          "/^incoming\\+.*@chat\\.maddie\\.wtf$/"
+        ];
       };
     };
 
