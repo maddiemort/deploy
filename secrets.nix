@@ -19,6 +19,8 @@ let
     "secrets/vexillologist-connection-string.age".publicKeys = [ koeia ];
     "secrets/vexillologist-discord-token.age".publicKeys = [ koeia ];
     "secrets/zulip-database-env.age".publicKeys = [ koeia ];
+    "secrets/zulip-incoming-hashed-password.age".publicKeys = [ atria ];
+    "secrets/zulip-incoming-password.age".publicKeys = [ koeia ];
     "secrets/zulip-memcached-env.age".publicKeys = [ koeia ];
     "secrets/zulip-noreply-hashed-password.age".publicKeys = [ atria ];
     "secrets/zulip-noreply-password.age".publicKeys = [ koeia ];

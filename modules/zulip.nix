@@ -153,6 +153,13 @@ in
         };
       };
 
+      services.cron = {
+        enable = true;
+        systemCronJobs = [
+          "* * * * *   root podman exec -u zulip zulip /home/zulip/deployments/current/manage.py email_mirror"
+        ];
+      };
+
       security.acme.acceptTerms = true;
       security.acme.certs."${cfg.hostname}".email = cfg.adminEmail;
 
@@ -302,6 +309,11 @@ in
               ZULIP_AUTH_BACKENDS = "EmailAuthBackend";
 
               SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS = "True";
+              SETTING_EMAIL_GATEWAY_IMAP_FOLDER = "INBOX";
+              SETTING_EMAIL_GATEWAY_IMAP_PORT = "993";
+              SETTING_EMAIL_GATEWAY_IMAP_SERVER = "mail.${cfg.hostname}";
+              SETTING_EMAIL_GATEWAY_LOGIN = "incoming@${cfg.hostname}";
+              SETTING_EMAIL_GATEWAY_PATTERN = "incoming+%s@${cfg.hostname}";
               SETTING_EMAIL_HOST = "mail.${cfg.hostname}";
               SETTING_EMAIL_HOST_USER = "noreply@${cfg.hostname}";
               SETTING_EMAIL_PORT = "587";
