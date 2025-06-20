@@ -62,6 +62,8 @@
             };
           in
           {
+            inherit (unstable) grafana;
+
             tailscale = unstable.tailscale.overrideAttrs (old: {
               subPackages = old.subPackages ++ [
                 "cmd/proxy-to-grafana"
