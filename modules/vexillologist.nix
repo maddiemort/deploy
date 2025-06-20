@@ -100,6 +100,7 @@ in
         host      sameuser       vexillologist-dev    100.114.76.116/32    trust
         host      sameuser       vexillologist-dev    100.85.114.74/32     trust
         host      sameuser       vexillologist-dev    100.72.174.83/32     trust
+        host      sameuser       vexillologist-dev    100.75.236.107/32    trust
       '';
       identMap = ''
         # ArbitraryMapName SystemUser DBUser
