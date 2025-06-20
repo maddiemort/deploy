@@ -39,8 +39,10 @@
 
   custom.services.prometheus = {
     nodes = [
+      "atria"
       "gnomon"
       "koeia"
+      "stribor"
     ];
 
     nodeExporter.enable = true;
