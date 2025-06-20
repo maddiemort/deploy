@@ -129,20 +129,23 @@
           "vexillologist",
           "flake-utils"
         ],
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": [
+          "vexillologist",
+          "nixpkgs"
+        ],
         "rust-overlay": "rust-overlay_3"
       },
       "locked": {
-        "lastModified": 1713199118,
-        "narHash": "sha256-MlLdAvk+zXCFUy280sY6LqtykqWXIkKVXo72J7a6HlU=",
+        "lastModified": 1750364353,
+        "narHash": "sha256-l06DIwnB4JHwP1isUUXk85F+AHQkUSUyAWnAmRxXICg=",
         "owner": "cargo2nix",
         "repo": "cargo2nix",
-        "rev": "1efb03f2f794ad5eed17e807e858c4da001dbc3e",
+        "rev": "a709c74619e1a2b68ed12bb398e12fbe29d69657",
         "type": "github"
       },
       "original": {
         "owner": "cargo2nix",
-        "ref": "main",
+        "ref": "release-0.12",
         "repo": "cargo2nix",
         "type": "github"
       }
@@ -424,6 +427,24 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_3"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -559,22 +580,6 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-24.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1720535198,
-        "narHash": "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "release-23.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -739,11 +744,7 @@
     },
     "rust-overlay_3": {
       "inputs": {
-        "flake-utils": [
-          "vexillologist",
-          "cargo2nix",
-          "flake-utils"
-        ],
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "vexillologist",
           "cargo2nix",
@@ -821,6 +822,21 @@
         "type": "github"
       }
     },
+    "systems_3": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "vexillologist": {
       "inputs": {
         "cargo2nix": "cargo2nix_3",
@@ -833,16 +849,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1739618100,
-        "narHash": "sha256-/f5BxZWyUHI9qKMtDXYZwMrj1S73XxVDNh24D6WTTMU=",
+        "lastModified": 1750444415,
+        "narHash": "sha256-qVg9KWepNALAMPAJ2jC3eyEsDkT5RjQl0I95AQgZ7f0=",
         "owner": "maddiemort",
         "repo": "vexillologist",
-        "rev": "556e059e3aa652d0334e3cefa409fee6d9ca8d83",
+        "rev": "b90d843ccbc4c17ab1ce08e3198175716623fa05",
         "type": "github"
       },
       "original": {
         "owner": "maddiemort",
-        "ref": "v1.3.0",
+        "ref": "v1.4.0",
         "repo": "vexillologist",
         "type": "github"
       }
