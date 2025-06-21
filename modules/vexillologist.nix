@@ -6,6 +6,7 @@
 
 let
   cfg = config.custom.services.vexillologist;
+  lokicfg = config.custom.services.loki;
 
   inherit (lib) mkEnableOption mkIf mkOverride mkOption types;
 in
@@ -147,6 +148,8 @@ in
         export RUST_LOG="info"
         export DISCORD_TOKEN="$(cat "${config.age.secrets."${cfg.discordToken.name}".path}")"
         export CONNECTION_STRING="$(cat "${config.age.secrets."${cfg.connectionString.name}".path}")"
+        export ENVIRONMENT="production"
+        export LOKI_URL="http://localhost:${toString lokicfg.port}"
         ${pkgs.vexillologist}/bin/vexillologist
       '';
     };

@@ -27,7 +27,7 @@
     wirebrush.inputs.nixpkgs.follows = "nixpkgs";
     wirebrush.inputs.flake-utils.follows = "flake-utils";
 
-    vexillologist.url = "github:maddiemort/vexillologist/v1.4.0";
+    vexillologist.url = "github:maddiemort/vexillologist/instrumentation";
     vexillologist.inputs.nixpkgs.follows = "nixpkgs-unstable";
     vexillologist.inputs.flake-utils.follows = "flake-utils";
 
