@@ -150,6 +150,7 @@ in
         export CONNECTION_STRING="$(cat "${config.age.secrets."${cfg.connectionString.name}".path}")"
         export ENVIRONMENT="production"
         export LOKI_URL="http://localhost:${toString lokicfg.port}"
+        export METRICS_PORT="9010"
         ${pkgs.vexillologist}/bin/vexillologist
       '';
     };

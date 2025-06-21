@@ -815,11 +815,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750514473,
-        "narHash": "sha256-cdDvl1lMmOzOIuiLSZPTSctRhnzrOIyv0VxhUe8zvno=",
+        "lastModified": 1750542835,
+        "narHash": "sha256-eHrsee7hwmgvTe3ZsAKV4kqS/TnsULO1aDwgNuTwRTs=",
         "owner": "maddiemort",
         "repo": "vexillologist",
-        "rev": "012c64c38cf636315e75ec98d8494a965514a4c3",
+        "rev": "e7212dec426a33762047fdc1d37ea8762e3712f8",
         "type": "github"
       },
       "original": {

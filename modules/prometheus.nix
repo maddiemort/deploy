@@ -59,6 +59,17 @@ in
       };
 
       scrapeConfigs = [
+        {
+          job_name = "vexillologist";
+          static_configs = [
+            {
+              targets = [
+                "localhost:9010"
+              ];
+              labels.host = "koeia";
+            }
+          ];
+        }
       ] ++ optionals cfg.enable [
         {
           job_name = "node";
