@@ -62,7 +62,13 @@
             };
           in
           {
-            inherit (unstable) grafana;
+            inherit (unstable)
+              grafana
+              loki
+              prometheus
+              prometheus-node-exporter
+              tempo
+              ;
 
             tailscale = unstable.tailscale.overrideAttrs (old: {
               subPackages = old.subPackages ++ [
