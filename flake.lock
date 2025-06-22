@@ -815,16 +815,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1750542835,
-        "narHash": "sha256-eHrsee7hwmgvTe3ZsAKV4kqS/TnsULO1aDwgNuTwRTs=",
+        "lastModified": 1751127948,
+        "narHash": "sha256-X/m1HIttpwIoP1aPOFt0jtHwPvJxpTUqoJXMGPdg5aY=",
         "owner": "maddiemort",
         "repo": "vexillologist",
-        "rev": "e7212dec426a33762047fdc1d37ea8762e3712f8",
+        "rev": "16ccd467e3d25ab3f1b1fcccbd9603686fa36578",
         "type": "github"
       },
       "original": {
         "owner": "maddiemort",
-        "ref": "instrumentation",
+        "ref": "v1.5.0",
         "repo": "vexillologist",
         "type": "github"
       }
