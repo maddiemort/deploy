@@ -14,6 +14,8 @@
 
     initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
     initrd.kernelModules = [ "nvme" ];
+
+    growPartition = true;
   };
 
   fileSystems = {
