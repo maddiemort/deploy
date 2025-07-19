@@ -63,6 +63,7 @@
           in
           {
             inherit (unstable)
+              anubis
               grafana
               loki
               prometheus

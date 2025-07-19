@@ -1,4 +1,5 @@
 { config
+, inputs
 , lib
 , pkgs
 , ...
@@ -10,6 +11,10 @@ let
   inherit (lib) mkIf;
 in
 {
+  imports = [
+    "${inputs.nixpkgs-unstable}/nixos/modules/services/networking/anubis.nix"
+  ];
+
   options = with lib; {
     custom.services.maddie-wtf = {
       enable = mkEnableOption "maddie.wtf website service";
@@ -33,6 +38,31 @@ in
 
     security.acme.certs."maddie.wtf".email = cfg.acme.email;
 
+    services.anubis.instances.maddie-wtf = {
+      settings = {
+        COOKIE_DOMAIN = "maddie.wtf";
+        METRICS_BIND = "127.0.0.1:9401";
+        METRICS_BIND_NETWORK = "tcp";
+        SERVE_ROBOTS_TXT = true;
+        TARGET = "http://127.0.0.1:6942";
+        WEBMASTER_EMAIL = "admin@maddie.wtf";
+      };
+    };
+
+    services.prometheus.scrapeConfigs = [
+      {
+        job_name = "anubis";
+        static_configs = [
+          {
+            targets = [
+              "localhost:9401"
+            ];
+            labels.target = "maddie-wtf";
+          }
+        ];
+      }
+    ];
+
     services.nginx = {
       enable = true;
 
@@ -41,11 +71,14 @@ in
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "http://127.0.0.1:6942";
+          proxyPass = "http://unix:${config.services.anubis.instances.maddie-wtf.settings.BIND}";
           proxyWebsockets = true;
+          recommendedProxySettings = true;
         };
       };
     };
+
+    users.users.nginx.extraGroups = [ config.users.groups.anubis.name ];
 
     users.users.maddie-wtf = {
       createHome = true;
