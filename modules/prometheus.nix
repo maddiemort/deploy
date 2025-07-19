@@ -70,6 +70,23 @@ in
             }
           ];
         }
+        {
+          job_name = "anubis";
+          static_configs = [
+            {
+              targets = [
+                "localhost:9401"
+              ];
+              labels.target = "maddie-wtf";
+            }
+            {
+              targets = [
+                "localhost:9402"
+              ];
+              labels.target = "wirebrush";
+            }
+          ];
+        }
       ] ++ optionals cfg.enable [
         {
           job_name = "node";

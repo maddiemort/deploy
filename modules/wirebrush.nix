@@ -38,6 +38,16 @@ in
 
     security.acme.certs."${cfg.domain}".email = cfg.acme.email;
 
+    services.anubis.instances.wirebrush = {
+      settings = {
+        COOKIE_DOMAIN = cfg.domain;
+        METRICS_BIND = "127.0.0.1:9402";
+        METRICS_BIND_NETWORK = "tcp";
+        SERVE_ROBOTS_TXT = true;
+        TARGET = "http://127.0.0.1:8000";
+      };
+    };
+
     services.nginx = {
       enable = true;
 
@@ -46,11 +56,14 @@ in
         forceSSL = true;
 
         locations."/" = {
-          proxyPass = "http://127.0.0.1:8000";
+          proxyPass = "http://unix:${config.services.anubis.instances.wirebrush.settings.BIND}";
           proxyWebsockets = true;
+          recommendedProxySettings = true;
         };
       };
     };
+
+    users.users.nginx.extraGroups = [ config.users.groups.anubis.name ];
 
     users.users.wirebrush = {
       createHome = true;

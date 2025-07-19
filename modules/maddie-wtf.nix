@@ -49,20 +49,6 @@ in
       };
     };
 
-    services.prometheus.scrapeConfigs = [
-      {
-        job_name = "anubis";
-        static_configs = [
-          {
-            targets = [
-              "localhost:9401"
-            ];
-            labels.target = "maddie-wtf";
-          }
-        ];
-      }
-    ];
-
     services.nginx = {
       enable = true;
 
