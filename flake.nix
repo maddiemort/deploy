@@ -15,7 +15,7 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Site for deployment to maddie.wtf.
-    maddie-wtf.url = "github:maddiemort/maddie-wtf/v0.1.3";
+    maddie-wtf.url = "github:maddiemort/maddie-wtf/main";
     maddie-wtf.inputs.flake-utils.follows = "flake-utils";
 
     maddie-wtf-content.url = "git+ssh://git@github.com/maddiemort/maddie-wtf-content.git";
