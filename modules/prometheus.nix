@@ -52,6 +52,9 @@ in
           inherit (cfg.nodeExporter) enable port;
           enabledCollectors = [ "systemd" ];
         };
+        nginx = {
+          inherit (cfg) enable;
+        };
       };
 
       globalConfig = {
@@ -87,7 +90,17 @@ in
             }
           ];
         }
-      ] ++ optionals cfg.enable [
+        {
+          job_name = "nginx";
+          static_configs = [
+            {
+              targets = [
+                "localhost:${toString config.services.prometheus.exporters.nginx.port}"
+              ];
+              labels.host = "koeia";
+            }
+          ];
+        }
         {
           job_name = "node";
           static_configs = map

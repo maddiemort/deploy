@@ -46,6 +46,7 @@
   # host for that domain.
   services.nginx = {
     enable = true;
+    statusPage = true;
     virtualHosts = {
       "\"\"" = {
         default = true;
