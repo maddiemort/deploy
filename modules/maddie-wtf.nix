@@ -12,7 +12,7 @@ let
 in
 {
   imports = [
-    "${inputs.nixpkgs-unstable}/nixos/modules/services/networking/anubis.nix"
+    "${inputs.nixpkgs-anubis}/nixos/modules/services/networking/anubis.nix"
   ];
 
   options = with lib; {

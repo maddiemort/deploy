@@ -6,6 +6,8 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils/main";
 
+    nixpkgs-anubis.url = "github:nullcubee/nixpkgs/nixos/fix-anubis-botPolicy";
+
     deploy-rs.url = "github:serokell/deploy-rs/master";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.inputs.utils.follows = "flake-utils";
@@ -45,6 +47,7 @@
     { self
     , nixpkgs
     , nixpkgs-unstable
+    , nixpkgs-anubis
     , flake-utils
     , ...
     } @ inputs:
@@ -57,13 +60,22 @@
 
         (final: prev:
           let
+            anubis = import nixpkgs-anubis {
+              inherit system;
+            };
+          in
+          {
+            inherit (anubis) anubis;
+          })
+
+        (final: prev:
+          let
             unstable = import nixpkgs-unstable {
               inherit system;
             };
           in
           {
             inherit (unstable)
-              anubis
               grafana
               loki
               prometheus

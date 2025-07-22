@@ -534,6 +534,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-anubis": {
+      "locked": {
+        "lastModified": 1752508172,
+        "narHash": "sha256-7qI8iccVVbL0TVIZyJ+5QESV87ZknyMdi5EA8hcSFZg=",
+        "owner": "nullcubee",
+        "repo": "nixpkgs",
+        "rev": "8dd9c9197acde02ee76ebd0b426e8d1ecaf5127e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nullcubee",
+        "ref": "nixos/fix-anubis-botPolicy",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1752841793,
@@ -593,6 +609,7 @@
         "maddie-wtf-content": "maddie-wtf-content",
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-anubis": "nixpkgs-anubis",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "onehalf": [
           "maddie-wtf",
