@@ -74,6 +74,17 @@ in
           ];
         }
         {
+          job_name = "maddie-wtf";
+          static_configs = [
+            {
+              targets = [
+                "localhost:9069"
+              ];
+              labels.host = "koeia";
+            }
+          ];
+        }
+        {
           job_name = "anubis";
           static_configs = [
             {

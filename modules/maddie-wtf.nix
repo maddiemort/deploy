@@ -94,6 +94,8 @@ in
         export CONTENT_PATH="${pkgs.maddie-wtf-content}"
         export STATIC_PATH="${pkgs.maddie-wtf-static}"
         export THEMES_PATH="${pkgs.onehalf}/sublimetext"
+        export ENVIRONMENT="production"
+        export METRICS_PORT="9069"
         ${pkgs.maddie-wtf}/bin/maddie-wtf
       '';
     };
