@@ -476,11 +476,11 @@
     "maddie-wtf-content": {
       "flake": false,
       "locked": {
-        "lastModified": 1753137499,
-        "narHash": "sha256-mp0/uUvUjv/jWqtpD1HR1tZzt+wddcHRyfXDLAMnP5o=",
+        "lastModified": 1753181414,
+        "narHash": "sha256-A3UbTw6y3ajRIbQnKo81UmRbKHWqY+PGmklqXK2IKuk=",
         "ref": "refs/heads/main",
-        "rev": "f6b8d43c8ff04315d183e9153c108ff395fd6012",
-        "revCount": 12,
+        "rev": "9bd0fd3dc2155697382a90906963285a0bfdca8d",
+        "revCount": 14,
         "type": "git",
         "url": "ssh://git@github.com/maddiemort/maddie-wtf-content.git"
       },
