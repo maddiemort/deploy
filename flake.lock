@@ -459,11 +459,11 @@
         "onehalf": "onehalf"
       },
       "locked": {
-        "lastModified": 1753136100,
-        "narHash": "sha256-MXHTU4QEFAynroIPV9+Mwor4v57Q8Zb/PoCVqTSKMEg=",
+        "lastModified": 1753186814,
+        "narHash": "sha256-Agm/yWDHkpzGCkpOXBAMRPSrQH9IWoM7dC2uavC0Sb0=",
         "owner": "maddiemort",
         "repo": "maddie-wtf",
-        "rev": "ec8b4087c7f7b440fbf11d1b3eaed2bea292f02c",
+        "rev": "7ca7011066df8d98a087fe89439c3d5294ba79b9",
         "type": "github"
       },
       "original": {
