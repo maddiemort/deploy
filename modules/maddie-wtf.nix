@@ -90,7 +90,7 @@ in
       };
 
       script = ''
-        export RUST_LOG="maddie_wtf=debug,info"
+        export RUST_LOG="info"
         export CONTENT_PATH="${pkgs.maddie-wtf-content}"
         export STATIC_PATH="${pkgs.maddie-wtf-static}"
         export THEMES_PATH="${pkgs.onehalf}/sublimetext"
