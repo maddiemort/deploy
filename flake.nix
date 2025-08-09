@@ -72,12 +72,15 @@
           let
             unstable = import nixpkgs-unstable {
               inherit system;
+              config.allowUnfree = true;
             };
           in
           {
             inherit (unstable)
               grafana
+              jre21_minimal
               loki
+              minecraftServers
               prometheus
               prometheus-node-exporter
               tempo

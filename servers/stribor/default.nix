@@ -1,4 +1,5 @@
 { modules
+, pkgs
 , ...
 }:
 
@@ -12,9 +13,17 @@
     modules.tailscale
   ];
 
-  custom.services.direwolf20 = {
+  services.minecraft-server = {
     enable = true;
-    memory = 6144;
+    declarative = false;
+    eula = true;
+    dataDir = "/srv/minecraft";
+    openFirewall = true;
+    # This should currently be 1.21.8
+    package = pkgs.minecraftServers.vanilla-1-21;
+    jvmOpts = ''
+      -Xms6144M -Xmx6144M
+    '';
   };
 
   custom.services.prometheus.nodeExporter.enable = true;

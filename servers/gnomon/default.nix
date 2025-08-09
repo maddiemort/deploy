@@ -7,13 +7,13 @@
     ./configuration.nix
 
     modules.arma-3-status-bot
-    modules.mince-pie-raft
+    modules.direwolf20-s14
     modules.prometheus
     modules.promtail
     modules.tailscale
   ];
 
-  custom.services.mince-pie-raft = {
+  custom.services.direwolf20-s14 = {
     enable = true;
     memory = 12288;
   };
