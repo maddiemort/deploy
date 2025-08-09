@@ -102,6 +102,18 @@ in
           ];
         }
         {
+          job_name = "minecraft";
+          static_configs = [
+            {
+              targets = [
+                "gnomon:19565"
+              ];
+              labels.host = "gnomon";
+              labels.modpack = "direwolf20-s14";
+            }
+          ];
+        }
+        {
           job_name = "nginx";
           static_configs = [
             {
