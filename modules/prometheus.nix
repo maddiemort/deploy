@@ -111,6 +111,13 @@ in
               labels.host = "gnomon";
               labels.application = "direwolf20-s14";
             }
+            {
+              targets = [
+                "stribor:19565"
+              ];
+              labels.host = "stribor";
+              labels.application = "vanilla";
+            }
           ];
         }
         {

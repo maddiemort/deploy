@@ -1,5 +1,4 @@
 { modules
-, pkgs
 , ...
 }:
 
@@ -8,22 +7,15 @@
     ./configuration.nix
 
     modules.direwolf20
+    modules.minecraft-almost-vanilla
     modules.prometheus
     modules.promtail
     modules.tailscale
   ];
 
-  services.minecraft-server = {
+  custom.services.minecraft-almost-vanilla = {
     enable = true;
-    declarative = false;
-    eula = true;
-    dataDir = "/srv/minecraft";
-    openFirewall = true;
-    # This should currently be 1.21.8
-    package = pkgs.minecraftServers.vanilla-1-21;
-    jvmOpts = ''
-      -Xms6144M -Xmx6144M
-    '';
+    memory = 6144;
   };
 
   custom.services.prometheus.nodeExporter.enable = true;
