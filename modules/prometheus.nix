@@ -109,7 +109,7 @@ in
                 "gnomon:19565"
               ];
               labels.host = "gnomon";
-              labels.modpack = "direwolf20-s14";
+              labels.application = "direwolf20-s14";
             }
           ];
         }
