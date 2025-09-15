@@ -23,6 +23,7 @@
     group = "josephcryer";
     extraGroups = [
       "minecraft"
+      "systemd-journal"
     ];
 
     openssh.authorizedKeys.keys = builtins.map builtins.readFile [
