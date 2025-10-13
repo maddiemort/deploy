@@ -22,6 +22,7 @@
     home = "/home/josephcryer";
     group = "josephcryer";
     extraGroups = [
+      "wheel"
       "minecraft"
       "systemd-journal"
     ];
@@ -33,17 +34,7 @@
 
   users.groups.josephcryer = { };
 
-  security.sudo.extraRules = [
-    {
-      users = [ "josephcryer" ];
-      commands = [
-        { command = "/run/current-system/sw/bin/systemctl restart direwolf20-s14.service"; options = [ "SETENV" "NOPASSWD" ]; }
-        { command = "/run/current-system/sw/bin/systemctl start direwolf20-s14.service"; options = [ "SETENV" "NOPASSWD" ]; }
-        { command = "/run/current-system/sw/bin/systemctl stop direwolf20-s14.service"; options = [ "SETENV" "NOPASSWD" ]; }
-        { command = "/run/current-system/sw/bin/systemctl kill --signal 9 direwolf20-s14.service"; options = [ "SETENV" "NOPASSWD" ]; }
-      ];
-    }
-  ];
+  security.sudo.wheelNeedsPassword = false;
 
   time.timeZone = "Europe/London";
 
