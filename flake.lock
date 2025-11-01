@@ -550,6 +550,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1762023927,
+        "narHash": "sha256-uy2LpcEjtHKUSn1ehMyZ1B+ROAw7nSQwqumr16uol4w=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "02f9db50b92d5b33d3dd6a2f74fa579c6a932ad9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1754711617,
@@ -610,6 +626,7 @@
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-anubis": "nixpkgs-anubis",
+        "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "onehalf": [
           "maddie-wtf",

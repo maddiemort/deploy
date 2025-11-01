@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils/main";
 
     nixpkgs-anubis.url = "github:nullcubee/nixpkgs/nixos/fix-anubis-botPolicy";
@@ -47,6 +48,7 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
+    nixpkgs-master,
     nixpkgs-anubis,
     flake-utils,
     ...
@@ -70,6 +72,10 @@
           inherit system;
           config.allowUnfree = true;
         };
+        master = import nixpkgs-master {
+          inherit system;
+          config.allowUnfree = true;
+        };
       in {
         inherit
           (unstable)
@@ -81,6 +87,11 @@
           prometheus
           prometheus-node-exporter
           tempo
+          ;
+
+        inherit
+          (master)
+          graalvmPackages
           ;
 
         tailscale = unstable.tailscale.overrideAttrs (old: {

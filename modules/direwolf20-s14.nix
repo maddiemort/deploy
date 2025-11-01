@@ -85,13 +85,11 @@ in {
         ];
 
         serviceConfig = {
-          # This JDK should be 21
           ExecStart = ''
-            ${pkgs.jdk}/bin/java \
+            ${pkgs.graalvmPackages.graalvm-ce}/bin/java \
               -Xms${toString cfg.memory}G \
               -Xmx${toString cfg.memory}G \
               -XX:+UseZGC \
-              -XX:+ZGenerational \
               @libraries/net/neoforged/neoforge/21.1.213/unix_args.txt \
               nogui
           '';
