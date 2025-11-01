@@ -92,7 +92,7 @@ in {
               -Xmx${toString cfg.memory}G \
               -XX:+UseZGC \
               -XX:+ZGenerational \
-              @libraries/net/neoforged/neoforge/21.1.172/unix_args.txt \
+              @libraries/net/neoforged/neoforge/21.1.213/unix_args.txt \
               nogui
           '';
           ExecStop = "${stopScript} $MAINPID";
