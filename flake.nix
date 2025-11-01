@@ -77,6 +77,7 @@
           in
           {
             inherit (unstable)
+              alejandra
               grafana
               jre21_minimal
               loki
@@ -174,6 +175,6 @@
         ];
       };
 
-      formatter = pkgs.nixpkgs-fmt;
+      formatter = pkgs.alejandra;
     });
 }
