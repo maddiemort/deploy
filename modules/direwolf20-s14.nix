@@ -75,6 +75,7 @@ in {
       };
 
       systemd.services.direwolf20-s14 = {
+        enable = true;
         description = "FTB Direwolf20 Season 14 Minecraft 1.21 Minecraft server service";
         wantedBy = ["multi-user.target"];
         requires = ["direwolf20-s14.socket"];
