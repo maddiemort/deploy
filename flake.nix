@@ -4,10 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
     flake-utils.url = "github:numtide/flake-utils/main";
 
     nixpkgs-anubis.url = "github:nullcubee/nixpkgs/nixos/fix-anubis-botPolicy";
+    nixpkgs-graalvm-oracle-23.url = "github:nixos/nixpkgs/3f078e4";
 
     deploy-rs.url = "github:serokell/deploy-rs/master";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
@@ -48,8 +48,8 @@
     self,
     nixpkgs,
     nixpkgs-unstable,
-    nixpkgs-master,
     nixpkgs-anubis,
+    nixpkgs-graalvm-oracle-23,
     flake-utils,
     ...
   } @ inputs: let
@@ -72,7 +72,7 @@
           inherit system;
           config.allowUnfree = true;
         };
-        master = import nixpkgs-master {
+        graalvm-oracle-23 = import nixpkgs-graalvm-oracle-23 {
           inherit system;
           config.allowUnfree = true;
         };
@@ -89,10 +89,7 @@
           tempo
           ;
 
-        inherit
-          (master)
-          graalvmPackages
-          ;
+        graalvm-oracle_23 = graalvm-oracle-23.graalvmPackages.graalvm-oracle_23;
 
         tailscale = unstable.tailscale.overrideAttrs (old: {
           subPackages =

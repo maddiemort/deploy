@@ -550,18 +550,18 @@
         "type": "github"
       }
     },
-    "nixpkgs-master": {
+    "nixpkgs-graalvm-oracle-23": {
       "locked": {
-        "lastModified": 1762023927,
-        "narHash": "sha256-uy2LpcEjtHKUSn1ehMyZ1B+ROAw7nSQwqumr16uol4w=",
+        "lastModified": 1755877640,
+        "narHash": "sha256-z4PuqvFZIsKsY8tkpgw+4+wQ59O75qYtinbhcpU1+cU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "02f9db50b92d5b33d3dd6a2f74fa579c6a932ad9",
+        "rev": "3f078e495f172be43ae7379f006bbe300cca4158",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "master",
+        "ref": "3f078e4",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -626,7 +626,7 @@
         "nixos-mailserver": "nixos-mailserver",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-anubis": "nixpkgs-anubis",
-        "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-graalvm-oracle-23": "nixpkgs-graalvm-oracle-23",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "onehalf": [
           "maddie-wtf",

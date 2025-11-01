@@ -86,11 +86,11 @@ in {
 
         serviceConfig = {
           ExecStart = ''
-            ${pkgs.graalvmPackages.graalvm-ce}/bin/java \
+            ${pkgs.graalvm-oracle_23}/bin/java \
               -Xms${toString cfg.memory}G \
               -Xmx${toString cfg.memory}G \
               -XX:+UseZGC \
-              @libraries/net/neoforged/neoforge/21.1.213/unix_args.txt \
+              @libraries/net/neoforged/neoforge/21.1.172/unix_args.txt \
               nogui
           '';
           ExecStop = "${stopScript} $MAINPID";
