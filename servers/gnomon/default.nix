@@ -32,7 +32,7 @@
   };
 
   custom.services.arma-3-status-bot = {
-    enable = true;
+    enable = false;
 
     discordToken = {
       name = "secrets/arma-3-status-discord-token";
