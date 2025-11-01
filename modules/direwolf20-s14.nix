@@ -31,11 +31,11 @@ in {
 
       memory = mkOption {
         description = ''
-          How many MB of memory to dedicate to the server.
+          How many GB of memory to dedicate to the server.
         '';
         type = types.int;
-        default = 3072;
-        example = 2048;
+        default = 3;
+        example = 2;
       };
     };
   };
@@ -87,8 +87,8 @@ in {
           # This JDK should be 21
           ExecStart = ''
             ${pkgs.jdk}/bin/java \
-              -Xms${toString cfg.memory}M \
-              -Xmx${toString cfg.memory}M \
+              -Xms${toString cfg.memory}G \
+              -Xmx${toString cfg.memory}G \
               -XX:+UseZGC \
               -XX:+ZGenerational \
               @libraries/net/neoforged/neoforge/21.1.172/unix_args.txt \

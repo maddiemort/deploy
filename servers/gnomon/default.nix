@@ -11,7 +11,7 @@
 
   custom.services.direwolf20-s14 = {
     enable = true;
-    memory = 14336;
+    memory = 12;
   };
 
   custom.services.prometheus.nodeExporter.enable = true;
