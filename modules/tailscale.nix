@@ -1,14 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-with lib;
-let
-  cfg = config.custom.services.tailscale;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.tailscale;
+in {
   options = {
     custom.services.tailscale = {
       enable = mkEnableOption "Activate Tailscale on this host";
@@ -52,9 +50,9 @@ in
     systemd.services.tailscale-autoconnect = {
       description = "Automatic connection to tailscale";
 
-      after = [ "network-pre.target" "tailscale.service" ];
-      wants = [ "network-pre.target" "tailscale.service" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig.Type = "oneshot";
 

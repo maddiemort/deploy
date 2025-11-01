@@ -1,16 +1,14 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.custom.services.vexillologist;
   lokicfg = config.custom.services.loki;
 
   inherit (lib) mkEnableOption mkIf mkOverride mkOption types;
-in
-{
+in {
   options = {
     custom.services.vexillologist = {
       enable = mkEnableOption "Vexillologist Discord bot";
@@ -67,7 +65,7 @@ in
       isSystemUser = true;
       group = "vexillologist";
     };
-    users.groups.vexillologist = { };
+    users.groups.vexillologist = {};
 
     services.postgresql = {
       inherit (cfg) enable;
@@ -118,7 +116,6 @@ in
       '';
     };
 
-
     age.secrets."${cfg.discordToken.name}" = {
       inherit (cfg.discordToken) file;
       owner = "vexillologist";
@@ -135,8 +132,8 @@ in
       inherit (cfg) enable;
 
       description = "Vexillologist Discord bot service";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
 
       serviceConfig = {
         Restart = "always";

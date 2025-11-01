@@ -1,14 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-with lib;
-let
-  cfg = config.custom.services.direwolf20;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.direwolf20;
+in {
   options = {
     custom.services.direwolf20 = {
       enable = mkEnableOption "Activate the Direwolf20 1.18 Minecraft server on this host";
@@ -51,12 +49,12 @@ in
       home = "/srv/direwolf20";
     };
 
-    users.groups.minecraft = { };
+    users.groups.minecraft = {};
 
     systemd.services.direwolf20 = {
       description = "FTB Direwolf20 1.18 Minecraft Server Service";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
 
       serviceConfig = {
         ExecStart = ''
@@ -77,8 +75,8 @@ in
     };
 
     networking.firewall = {
-      allowedTCPPorts = [ cfg.port ];
-      allowedUDPPorts = [ cfg.port ];
+      allowedTCPPorts = [cfg.port];
+      allowedUDPPorts = [cfg.port];
     };
   };
 }

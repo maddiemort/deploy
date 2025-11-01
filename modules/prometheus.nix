@@ -1,14 +1,12 @@
-{ config
-, lib
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.custom.services.prometheus;
 
   inherit (lib) optionals;
-in
-{
+in {
   options = with lib; {
     custom.services.prometheus = {
       enable = mkEnableOption "Prometheus";
@@ -16,7 +14,7 @@ in
       nodes = mkOption {
         description = "List of hostnames of servers running node-exporter to scrape from";
         type = types.listOf types.str;
-        default = [ ];
+        default = [];
       };
 
       port = mkOption rec {
@@ -50,7 +48,7 @@ in
       exporters = {
         node = {
           inherit (cfg.nodeExporter) enable port;
-          enabledCollectors = [ "systemd" ];
+          enabledCollectors = ["systemd"];
         };
         nginx = {
           inherit (cfg) enable;
@@ -133,9 +131,10 @@ in
         }
         {
           job_name = "node";
-          static_configs = map
+          static_configs =
+            map
             (hostname: {
-              targets = [ "${hostname}:${toString cfg.nodeExporter.port}" ];
+              targets = ["${hostname}:${toString cfg.nodeExporter.port}"];
               labels.host = hostname;
             })
             cfg.nodes;

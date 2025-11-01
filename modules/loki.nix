@@ -1,15 +1,13 @@
-{ config
-, lib
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.custom.services.loki;
   home = "/srv/loki";
 
   inherit (lib) mkIf;
-in
-{
+in {
   options = with lib; {
     custom.services.loki = {
       enable = mkEnableOption "Loki";
@@ -51,16 +49,18 @@ in
         };
 
         schema_config = {
-          configs = [{
-            from = "2024-08-11";
-            object_store = "filesystem";
-            store = "tsdb";
-            schema = "v13";
-            index = {
-              prefix = "index_";
-              period = "24h";
-            };
-          }];
+          configs = [
+            {
+              from = "2024-08-11";
+              object_store = "filesystem";
+              store = "tsdb";
+              schema = "v13";
+              index = {
+                prefix = "index_";
+                period = "24h";
+              };
+            }
+          ];
         };
 
         storage_config = {

@@ -1,14 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-with lib;
-let
-  cfg = config.custom.services.minecraft-almost-vanilla;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.minecraft-almost-vanilla;
+in {
   options = {
     custom.services.minecraft-almost-vanilla = {
       enable = mkEnableOption "Activate the Minecraft 1.21.8 Almost Vanilla server on this host";

@@ -1,11 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-
-with lib;
-let
+with lib; let
   cfg = config.custom.services.mince-pie-raft;
 
   eulaFile = builtins.toFile "eula.txt" ''
@@ -22,8 +21,7 @@ let
       sleep 1s
     done
   '';
-in
-{
+in {
   options = {
     custom.services.mince-pie-raft = {
       enable = mkEnableOption "FTB Evolution server";
@@ -65,10 +63,10 @@ in
       isSystemUser = true;
       group = "minecraft";
     };
-    users.groups.minecraft = { };
+    users.groups.minecraft = {};
 
     systemd.sockets.mince-pie-raft = {
-      bindsTo = [ "mince-pie-raft.service" ];
+      bindsTo = ["mince-pie-raft.service"];
       socketConfig = {
         ListenFIFO = "/run/mince-pie-raft.stdin";
         SocketMode = "0660";
@@ -83,9 +81,9 @@ in
       inherit (cfg) enable;
 
       description = "FTB Evolution Minecraft Server Service";
-      wantedBy = [ "multi-user.target" ];
-      requires = [ "mince-pie-raft.socket" ];
-      after = [ "network.target" "mince-pie-raft.socket" ];
+      wantedBy = ["multi-user.target"];
+      requires = ["mince-pie-raft.socket"];
+      after = ["network.target" "mince-pie-raft.socket"];
 
       serviceConfig = {
         ExecStart = ''
@@ -105,8 +103,8 @@ in
         StandardError = "journal";
 
         # Hardening
-        CapabilityBoundingSet = [ "" ];
-        DeviceAllow = [ "" ];
+        CapabilityBoundingSet = [""];
+        DeviceAllow = [""];
         LockPersonality = true;
         PrivateDevices = true;
         PrivateTmp = true;
@@ -119,7 +117,7 @@ in
         ProtectKernelModules = true;
         ProtectKernelTunables = true;
         ProtectProc = "invisible";
-        RestrictAddressFamilies = [ "AF_INET" "AF_INET6" ];
+        RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;
@@ -133,8 +131,8 @@ in
     };
 
     networking.firewall = {
-      allowedTCPPorts = [ cfg.port ];
-      allowedUDPPorts = [ cfg.port ];
+      allowedTCPPorts = [cfg.port];
+      allowedUDPPorts = [cfg.port];
     };
   };
 }

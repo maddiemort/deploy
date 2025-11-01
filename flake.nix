@@ -43,77 +43,76 @@
     nixos-mailserver.inputs.utils.follows = "flake-utils";
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , nixpkgs-unstable
-    , nixpkgs-anubis
-    , flake-utils
-    , ...
-    } @ inputs:
-    let
-      inherit (nixpkgs.lib) nixosSystem;
-      inherit (flake-utils.lib) eachDefaultSystem;
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    nixpkgs-anubis,
+    flake-utils,
+    ...
+  } @ inputs: let
+    inherit (nixpkgs.lib) nixosSystem;
+    inherit (flake-utils.lib) eachDefaultSystem;
 
-      mkOverlays = system: [
-        inputs.agenix.overlays.default
+    mkOverlays = system: [
+      inputs.agenix.overlays.default
 
-        (final: prev:
-          let
-            anubis = import nixpkgs-anubis {
-              inherit system;
-            };
-          in
-          {
-            inherit (anubis) anubis;
-          })
+      (final: prev: let
+        anubis = import nixpkgs-anubis {
+          inherit system;
+        };
+      in {
+        inherit (anubis) anubis;
+      })
 
-        (final: prev:
-          let
-            unstable = import nixpkgs-unstable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          in
-          {
-            inherit (unstable)
-              alejandra
-              grafana
-              jre21_minimal
-              loki
-              minecraftServers
-              prometheus
-              prometheus-node-exporter
-              tempo
-              ;
+      (final: prev: let
+        unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in {
+        inherit
+          (unstable)
+          alejandra
+          grafana
+          jre21_minimal
+          loki
+          minecraftServers
+          prometheus
+          prometheus-node-exporter
+          tempo
+          ;
 
-            tailscale = unstable.tailscale.overrideAttrs (old: {
-              subPackages = old.subPackages ++ [
-                "cmd/proxy-to-grafana"
-              ];
-            });
-          })
+        tailscale = unstable.tailscale.overrideAttrs (old: {
+          subPackages =
+            old.subPackages
+            ++ [
+              "cmd/proxy-to-grafana"
+            ];
+        });
+      })
 
-        (final: prev: {
-          deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
+      (final: prev: {
+        deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
 
-          maddie-wtf = inputs.maddie-wtf.packages.${system}.maddie-wtf;
-          maddie-wtf-static = inputs.maddie-wtf.packages.${system}.maddie-wtf-static;
-          onehalf = inputs.onehalf;
+        maddie-wtf = inputs.maddie-wtf.packages.${system}.maddie-wtf;
+        maddie-wtf-static = inputs.maddie-wtf.packages.${system}.maddie-wtf-static;
+        onehalf = inputs.onehalf;
 
-          maddie-wtf-content = inputs.maddie-wtf-content;
+        maddie-wtf-content = inputs.maddie-wtf-content;
 
-          wirebrush = inputs.wirebrush.packages.${system}.wirebrush;
-          wirebrush-content = inputs.wirebrush.packages.${system}.content;
-          wirebrush-static = inputs.wirebrush.packages.${system}.static;
+        wirebrush = inputs.wirebrush.packages.${system}.wirebrush;
+        wirebrush-content = inputs.wirebrush.packages.${system}.content;
+        wirebrush-static = inputs.wirebrush.packages.${system}.static;
 
-          vexillologist = inputs.vexillologist.packages.${system}.default;
+        vexillologist = inputs.vexillologist.packages.${system}.default;
 
-          arma-3-status-bot = inputs.arma-3-status-bot.packages.${system}.default;
-        })
-      ];
+        arma-3-status-bot = inputs.arma-3-status-bot.packages.${system}.default;
+      })
+    ];
 
-      mkSystem = system: config: nixosSystem {
+    mkSystem = system: config:
+      nixosSystem {
         inherit system;
         modules = [
           inputs.agenix.nixosModules.age
@@ -122,18 +121,20 @@
         ];
         specialArgs = {
           inherit inputs mkOverlays system;
-          modules = self.nixosModules // {
-            mailserver = inputs.nixos-mailserver.nixosModules.mailserver;
-          };
+          modules =
+            self.nixosModules
+            // {
+              mailserver = inputs.nixos-mailserver.nixosModules.mailserver;
+            };
         };
       };
 
-      mkNode = system: nixosConfig: {
-        hostname = nixosConfig.config.networking.hostName;
-        profiles.system.user = "root";
-        profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos nixosConfig;
-      };
-    in
+    mkNode = system: nixosConfig: {
+      hostname = nixosConfig.config.networking.hostName;
+      profiles.system.user = "root";
+      profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos nixosConfig;
+    };
+  in
     {
       nixosConfigurations = {
         atria = mkSystem "x86_64-linux" (import ./servers/atria);
@@ -149,7 +150,7 @@
         autoRollback = true;
         remoteBuild = true;
         sshUser = "root";
-        sshOpts = [ "-F" "/dev/null" ];
+        sshOpts = ["-F" "/dev/null"];
 
         nodes = {
           atria = mkNode "x86_64-linux" self.nixosConfigurations.atria;
@@ -158,15 +159,14 @@
           stribor = mkNode "x86_64-linux" self.nixosConfigurations.stribor;
         };
       };
-    } // eachDefaultSystem (system:
-    let
+    }
+    // eachDefaultSystem (system: let
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         overlays = mkOverlays system;
       };
-    in
-    {
+    in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
           age-plugin-yubikey

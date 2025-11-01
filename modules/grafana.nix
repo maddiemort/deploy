@@ -1,19 +1,17 @@
-{ config
-, lib
-, pkgs
-, modules
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  modules,
+  ...
+}: let
   cfg = config.custom.services.grafana;
   lokicfg = config.custom.services.loki;
   promcfg = config.custom.services.prometheus;
   tempocfg = config.custom.services.tempo;
 
   inherit (lib) mkIf mkMerge;
-in
-{
+in {
   imports = [
     modules.loki
     modules.prometheus
@@ -223,10 +221,10 @@ in
         home = "/srv/proxy-to-grafana";
       };
 
-      users.groups.proxy-to-grafana = { };
+      users.groups.proxy-to-grafana = {};
 
       systemd.services.proxy-to-grafana = {
-        wantedBy = [ "multi-user.target" ];
+        wantedBy = ["multi-user.target"];
 
         serviceConfig = {
           User = "proxy-to-grafana";

@@ -1,8 +1,4 @@
-{ lib
-, ...
-}:
-
-{
+{lib, ...}: {
   imports = [
     ./hardware.nix
     ./networking.nix

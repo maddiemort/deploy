@@ -1,14 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-with lib;
-let
-  cfg = config.custom.services.direwolf20-s14;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.direwolf20-s14;
+in {
   options = {
     custom.services.direwolf20-s14 = {
       enable = mkEnableOption "Activate the FTB Direwolf20 Season 14 Minecraft 1.21 server on this host";
@@ -42,18 +40,17 @@ in
     };
   };
 
-  config =
-    let
-      stopScript = pkgs.writeShellScript "minecraft-server-stop" ''
-        echo stop > ${config.systemd.sockets.direwolf20-s14.socketConfig.ListenFIFO}
+  config = let
+    stopScript = pkgs.writeShellScript "minecraft-server-stop" ''
+      echo stop > ${config.systemd.sockets.direwolf20-s14.socketConfig.ListenFIFO}
 
-        # Wait for the PID of the minecraft server to disappear before returning, so systemd doesn't
-        # attempt to SIGKILL it.
-        while kill -0 "$1" 2> /dev/null; do
-          sleep 1s
-        done
-      '';
-    in
+      # Wait for the PID of the minecraft server to disappear before returning, so systemd doesn't
+      # attempt to SIGKILL it.
+      while kill -0 "$1" 2> /dev/null; do
+        sleep 1s
+      done
+    '';
+  in
     mkIf cfg.enable {
       users.users.minecraft = {
         createHome = true;
@@ -63,10 +60,10 @@ in
         home = "/srv/direwolf20-s14";
       };
 
-      users.groups.minecraft = { };
+      users.groups.minecraft = {};
 
       systemd.sockets.direwolf20-s14 = {
-        bindsTo = [ "direwolf20-s14.service" ];
+        bindsTo = ["direwolf20-s14.service"];
         socketConfig = {
           ListenFIFO = "/run/direwolf20-s14.stdin";
           SocketMode = "0660";
@@ -79,8 +76,8 @@ in
 
       systemd.services.direwolf20-s14 = {
         description = "FTB Direwolf20 Season 14 Minecraft 1.21 Minecraft server service";
-        wantedBy = [ "multi-user.target" ];
-        requires = [ "direwolf20-s14.socket" ];
+        wantedBy = ["multi-user.target"];
+        requires = ["direwolf20-s14.socket"];
         after = [
           "network.target"
           "direwolf20-s14.socket"
@@ -128,8 +125,8 @@ in
           StandardError = "journal";
 
           # Hardening
-          CapabilityBoundingSet = [ "" ];
-          DeviceAllow = [ "" ];
+          CapabilityBoundingSet = [""];
+          DeviceAllow = [""];
           LockPersonality = true;
           PrivateDevices = true;
           PrivateTmp = true;
@@ -155,8 +152,8 @@ in
       };
 
       networking.firewall = {
-        allowedTCPPorts = [ cfg.port ];
-        allowedUDPPorts = [ cfg.port ];
+        allowedTCPPorts = [cfg.port];
+        allowedUDPPorts = [cfg.port];
       };
     };
 }

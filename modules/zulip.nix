@@ -1,13 +1,11 @@
-{ config
-, lib
-, ...
-}:
-
-with lib;
-let
-  cfg = config.custom.services.zulip;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.custom.services.zulip;
+in {
   options = {
     custom.services.zulip = {
       enable = mkEnableOption "Zulip server";

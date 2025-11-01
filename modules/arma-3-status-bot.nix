@@ -1,15 +1,13 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.custom.services.arma-3-status-bot;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
-in
-{
+in {
   options = {
     custom.services.arma-3-status-bot = {
       enable = mkEnableOption "Arma 3 status Discord bot";
@@ -63,7 +61,7 @@ in
       home = "/srv/arma-3-status-bot";
     };
 
-    users.groups.arma-3-status-bot = { };
+    users.groups.arma-3-status-bot = {};
 
     age.secrets."${cfg.discordToken.name}" = {
       inherit (cfg.discordToken) file;
@@ -78,9 +76,9 @@ in
     };
 
     systemd.services.arma-3-status-bot = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ ];
-      wants = [ ];
+      wantedBy = ["multi-user.target"];
+      after = [];
+      wants = [];
 
       serviceConfig = {
         User = "arma-3-status-bot";

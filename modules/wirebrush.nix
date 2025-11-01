@@ -1,15 +1,13 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.custom.services.wirebrush;
 
   inherit (lib) mkIf;
-in
-{
+in {
   options = with lib; {
     custom.services.wirebrush = {
       enable = mkEnableOption "wirebrush website service";
@@ -34,7 +32,7 @@ in
 
   config = mkIf cfg.enable {
     # Expose the HTTP and HTTPS ports to the public internet
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [80 443];
 
     security.acme.certs."${cfg.domain}".email = cfg.acme.email;
 
@@ -63,7 +61,7 @@ in
       };
     };
 
-    users.users.nginx.extraGroups = [ config.users.groups.anubis.name ];
+    users.users.nginx.extraGroups = [config.users.groups.anubis.name];
 
     users.users.wirebrush = {
       createHome = true;
@@ -73,12 +71,12 @@ in
       home = "/srv/wirebrush";
     };
 
-    users.groups.wirebrush = { };
+    users.groups.wirebrush = {};
 
     systemd.services.wirebrush = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ ];
-      wants = [ ];
+      wantedBy = ["multi-user.target"];
+      after = [];
+      wants = [];
 
       serviceConfig = {
         User = "wirebrush";

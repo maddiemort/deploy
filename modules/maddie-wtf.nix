@@ -1,16 +1,14 @@
-{ config
-, inputs
-, lib
-, pkgs
-, ...
-}:
-
-let
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.custom.services.maddie-wtf;
 
   inherit (lib) mkIf;
-in
-{
+in {
   imports = [
     "${inputs.nixpkgs-anubis}/nixos/modules/services/networking/anubis.nix"
   ];
@@ -34,7 +32,7 @@ in
 
   config = mkIf cfg.enable {
     # Expose the HTTP and HTTPS ports to the public internet
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [80 443];
 
     security.acme.certs."maddie.wtf".email = cfg.acme.email;
 
@@ -64,7 +62,7 @@ in
       };
     };
 
-    users.users.nginx.extraGroups = [ config.users.groups.anubis.name ];
+    users.users.nginx.extraGroups = [config.users.groups.anubis.name];
 
     users.users.maddie-wtf = {
       createHome = true;
@@ -74,12 +72,12 @@ in
       home = "/srv/maddie-wtf";
     };
 
-    users.groups.maddie-wtf = { };
+    users.groups.maddie-wtf = {};
 
     systemd.services.maddie-wtf = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ ];
-      wants = [ ];
+      wantedBy = ["multi-user.target"];
+      after = [];
+      wants = [];
 
       serviceConfig = {
         User = "maddie-wtf";

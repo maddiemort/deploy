@@ -1,8 +1,4 @@
-{ lib
-, ...
-}:
-
-{
+{lib, ...}: {
   imports = [
     ./hardware.nix
     ./networking.nix
@@ -32,7 +28,7 @@
     ];
   };
 
-  users.groups.josephcryer = { };
+  users.groups.josephcryer = {};
 
   security.sudo.wheelNeedsPassword = false;
 

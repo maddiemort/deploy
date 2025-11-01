@@ -1,11 +1,10 @@
-{ inputs
-, pkgs
-, system
-, mkOverlays
-, ...
-}:
-
 {
+  inputs,
+  pkgs,
+  system,
+  mkOverlays,
+  ...
+}: {
   imports = [
     "${inputs.nixpkgs-anubis}/nixos/modules/services/networking/anubis.nix"
   ];

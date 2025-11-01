@@ -1,8 +1,4 @@
-{ modules
-, ...
-}:
-
-{
+{modules, ...}: {
   imports = [
     ./configuration.nix
 

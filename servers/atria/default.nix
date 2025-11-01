@@ -1,9 +1,8 @@
-{ config
-, modules
-, ...
-}:
-
 {
+  config,
+  modules,
+  ...
+}: {
   imports = [
     ./configuration.nix
 
@@ -47,7 +46,7 @@
   mailserver = {
     enable = true;
     fqdn = "mail.chat.maddie.wtf";
-    domains = [ "chat.maddie.wtf" ];
+    domains = ["chat.maddie.wtf"];
 
     loginAccounts = {
       "noreply@chat.maddie.wtf" = {

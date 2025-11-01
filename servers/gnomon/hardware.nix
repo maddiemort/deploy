@@ -1,19 +1,18 @@
-{ config
-, lib
-, modulesPath
-, ...
-}:
-
 {
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  config,
+  lib,
+  modulesPath,
+  ...
+}: {
+  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
   boot = {
     loader.grub = {
       enable = true;
       device = "/dev/sda";
     };
-    initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi" ];
-    initrd.kernelModules = [ "nvme" ];
+    initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront" "vmw_pvscsi"];
+    initrd.kernelModules = ["nvme"];
 
     growPartition = true;
   };
@@ -23,7 +22,7 @@
     fsType = "ext4";
   };
 
-  swapDevices = [ ];
+  swapDevices = [];
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

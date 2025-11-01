@@ -1,14 +1,12 @@
-{ config
-, lib
-, ...
-}:
-
-let
+{
+  config,
+  lib,
+  ...
+}: let
   cfg = config.custom.services.tempo;
 
   inherit (lib) mkIf;
-in
-{
+in {
   options = with lib; {
     custom.services.tempo = {
       enable = mkEnableOption "Tempo";

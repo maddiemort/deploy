@@ -1,11 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-
-with lib;
-let
+with lib; let
   cfg = config.custom.services.pounce;
 
   server = types.submodule {
@@ -36,8 +35,7 @@ let
       };
     };
   };
-in
-{
+in {
   options = {
     custom.services.pounce = {
       enable = mkEnableOption "pounce IRC bouncer";
@@ -62,120 +60,129 @@ in
       instances = mkOption {
         type = types.attrsOf server;
         description = "Servers to set up bouncers for";
-        default = { };
+        default = {};
       };
     };
   };
 
-  config =
-    let
-      inherit (lib.attrsets) mapAttrs' mapAttrsToList;
-      inherit (lib.modules) mkMerge;
-    in
+  config = let
+    inherit (lib.attrsets) mapAttrs' mapAttrsToList;
+    inherit (lib.modules) mkMerge;
+  in
     mkIf cfg.enable {
-      environment.etc = (mapAttrs'
-        (name: instance: {
-          name = "xdg/pounce/${name}";
-          value = {
-            text = ''
-              local-cert = /var/lib/acme/${instance.local-host}/fullchain.pem
-              local-priv = /var/lib/acme/${instance.local-host}/key.pem
+      environment.etc =
+        (
+          mapAttrs'
+          (name: instance: {
+            name = "xdg/pounce/${name}";
+            value = {
+              text = ''
+                local-cert = /var/lib/acme/${instance.local-host}/fullchain.pem
+                local-priv = /var/lib/acme/${instance.local-host}/key.pem
 
-              local-host = ${instance.local-host}
-              host = ${instance.remote-host}
+                local-host = ${instance.local-host}
+                host = ${instance.remote-host}
 
-              client-cert = ${instance.client-cert}
-              client-priv = ${instance.client-cert}
-              sasl-external
+                client-cert = ${instance.client-cert}
+                client-priv = ${instance.client-cert}
+                sasl-external
 
-              nick = ${instance.nick}
-              real = ${instance.real}
-            '';
-          };
-        })
-        cfg.instances
-      ) // {
-        "xdg/pounce/defaults".text = ''
-          local-ca = ${cfg.local-ca}
-          local-path = /srv/pounce
-        '';
-      };
+                nick = ${instance.nick}
+                real = ${instance.real}
+              '';
+            };
+          })
+          cfg.instances
+        )
+        // {
+          "xdg/pounce/defaults".text = ''
+            local-ca = ${cfg.local-ca}
+            local-path = /srv/pounce
+          '';
+        };
 
-      users.groups.pounce = { };
+      users.groups.pounce = {};
       users.users.pounce = {
         description = "Pounce IRC bouncer user";
         home = "/srv/pounce";
         createHome = true;
         isSystemUser = true;
         group = "pounce";
-        extraGroups = [ "keys" "nginx" ];
+        extraGroups = ["keys" "nginx"];
       };
 
-      systemd.services = (mapAttrs'
-        (name: instance: {
-          name = "pounce-${name}";
-          value = {
-            description = "Pounce IRC Bouncer Service (${name})";
-            wantedBy = [ "multi-user.target" ];
-            after = [
-              "network.target"
-              "acme-${instance.acme-host}.service"
-            ];
+      systemd.services =
+        (
+          mapAttrs'
+          (name: instance: {
+            name = "pounce-${name}";
+            value = {
+              description = "Pounce IRC Bouncer Service (${name})";
+              wantedBy = ["multi-user.target"];
+              after = [
+                "network.target"
+                "acme-${instance.acme-host}.service"
+              ];
+
+              serviceConfig = {
+                ExecStart = "${pkgs.pounce}/bin/pounce defaults ${name}";
+                Restart = "always";
+                User = "pounce";
+                WorkingDirectory = "/srv/pounce";
+              };
+            };
+          })
+          cfg.instances
+        )
+        // {
+          calico = {
+            description = "Calico IRC Dispatcher";
+            wantedBy = ["multi-user.target"];
+            after =
+              mapAttrsToList
+              (name: _: "pounce-${name}.service")
+              cfg.instances;
 
             serviceConfig = {
-              ExecStart = "${pkgs.pounce}/bin/pounce defaults ${name}";
+              ExecStart = ''
+                ${pkgs.pounce}/bin/calico \
+                  -P ${toString cfg.calico-port} \
+                  /srv/pounce
+              '';
               Restart = "always";
               User = "pounce";
               WorkingDirectory = "/srv/pounce";
             };
           };
-        })
-        cfg.instances
-      ) // {
-        calico = {
-          description = "Calico IRC Dispatcher";
-          wantedBy = [ "multi-user.target" ];
-          after = mapAttrsToList
-            (name: _: "pounce-${name}.service")
-            cfg.instances;
-
-          serviceConfig = {
-            ExecStart = ''
-              ${pkgs.pounce}/bin/calico \
-                -P ${toString cfg.calico-port} \
-                /srv/pounce
-            '';
-            Restart = "always";
-            User = "pounce";
-            WorkingDirectory = "/srv/pounce";
-          };
         };
-      };
 
-      networking.firewall.allowedTCPPorts = [ 80 443 cfg.external-port ];
+      networking.firewall.allowedTCPPorts = [80 443 cfg.external-port];
 
       services.nginx = {
         enable = true;
         recommendedProxySettings = true;
 
-        virtualHosts = (mapAttrs'
-          (_: instance: {
-            name = instance.local-host;
-            value = {
-              forceSSL = true;
-              useACMEHost = instance.acme-host;
-            };
-          })
-          cfg.instances
-        ) // (mapAttrs'
-          (_: instance: {
-            name = instance.acme-host;
-            value = {
-              enableACME = true;
-              forceSSL = true;
-            };
-          })
-          cfg.instances);
+        virtualHosts =
+          (
+            mapAttrs'
+            (_: instance: {
+              name = instance.local-host;
+              value = {
+                forceSSL = true;
+                useACMEHost = instance.acme-host;
+              };
+            })
+            cfg.instances
+          )
+          // (mapAttrs'
+            (_: instance: {
+              name = instance.acme-host;
+              value = {
+                enableACME = true;
+                forceSSL = true;
+              };
+            })
+            cfg.instances);
 
         streamConfig = ''
           upstream calico {
@@ -194,7 +201,7 @@ in
       security.acme.certs = mkMerge (mapAttrsToList
         (_: instance: {
           "${instance.acme-host}" = {
-            extraDomainNames = [ instance.local-host ];
+            extraDomainNames = [instance.local-host];
           };
         })
         cfg.instances);
