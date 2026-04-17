@@ -1,8 +1,10 @@
 {
   description = "Unified deployment configuration flake";
 
+  nixConfig.extra-deprecated-features = "url-literals";
+
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils/main";
 
@@ -37,8 +39,9 @@
     arma-3-status-bot.inputs.nixpkgs.follows = "nixpkgs-unstable";
     arma-3-status-bot.inputs.flake-utils.follows = "flake-utils";
 
-    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
     nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    nixos-mailserver.inputs.nixpkgs-24_11.follows = "nixpkgs";
   };
 
   outputs = {
@@ -73,6 +76,7 @@
           jre21_minimal
           loki
           minecraftServers
+          # nix
           prometheus
           prometheus-node-exporter
           tempo

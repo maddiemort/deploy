@@ -45,8 +45,6 @@
 
   mailserver = {
     enable = true;
-    stateVersion = 1;
-
     fqdn = "mail.chat.maddie.wtf";
     domains = ["chat.maddie.wtf"];
 
