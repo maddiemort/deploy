@@ -15,6 +15,7 @@
   promtail = import ./promtail.nix;
   tailscale = import ./tailscale.nix;
   tempo = import ./tempo.nix;
+  terraria = import ./terraria.nix;
   vexillologist = import ./vexillologist.nix;
   wirebrush = import ./wirebrush.nix;
   zulip = import ./zulip.nix;

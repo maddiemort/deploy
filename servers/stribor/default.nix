@@ -7,6 +7,7 @@
     modules.prometheus
     modules.promtail
     modules.tailscale
+    modules.terraria
   ];
 
   custom.services.minecraft-almost-vanilla = {
@@ -28,6 +29,15 @@
     authKey = {
       name = "secrets/tailscale-stribor";
       file = ../../secrets/tailscale-stribor.age;
+    };
+  };
+
+  custom.services.terraria = {
+    enable = true;
+
+    password = {
+      name = "secrets/terraria-password";
+      file = ../../secrets/terraria-password.age;
     };
   };
 }

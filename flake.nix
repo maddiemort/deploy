@@ -80,6 +80,7 @@
           prometheus
           prometheus-node-exporter
           tempo
+          terraria-server
           ;
 
         graalvm-oracle_23 = graalvm-oracle-23.graalvmPackages.graalvm-oracle_23;

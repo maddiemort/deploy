@@ -16,6 +16,7 @@ let
     "secrets/tailscale-grafana.age".publicKeys = [koeia];
     "secrets/tailscale-koeia.age".publicKeys = [koeia];
     "secrets/tailscale-stribor.age".publicKeys = [stribor];
+    "secrets/terraria-password.age".publicKeys = [stribor];
     "secrets/vexillologist-connection-string.age".publicKeys = [koeia];
     "secrets/vexillologist-discord-token.age".publicKeys = [koeia];
     "secrets/zulip-database-env.age".publicKeys = [koeia];
