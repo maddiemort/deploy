@@ -10,7 +10,7 @@
   ];
 
   custom.services.minecraft-almost-vanilla = {
-    enable = true;
+    enable = false;
     memory = 6144;
   };
 

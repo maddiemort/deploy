@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -9,10 +8,6 @@
 
   inherit (lib) mkIf;
 in {
-  imports = [
-    "${inputs.nixpkgs-anubis}/nixos/modules/services/networking/anubis.nix"
-  ];
-
   options = with lib; {
     custom.services.maddie-wtf = {
       enable = mkEnableOption "maddie.wtf website service";

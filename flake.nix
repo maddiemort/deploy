@@ -2,11 +2,10 @@
   description = "Unified deployment configuration flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils/main";
 
-    nixpkgs-anubis.url = "github:nullcubee/nixpkgs/nixos/fix-anubis-botPolicy";
     nixpkgs-graalvm-oracle-23.url = "github:nixos/nixpkgs/3f078e4";
 
     deploy-rs.url = "github:serokell/deploy-rs/master";
@@ -38,17 +37,14 @@
     arma-3-status-bot.inputs.nixpkgs.follows = "nixpkgs-unstable";
     arma-3-status-bot.inputs.flake-utils.follows = "flake-utils";
 
-    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.11";
     nixos-mailserver.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    nixos-mailserver.inputs.nixpkgs-24_05.follows = "nixpkgs";
-    nixos-mailserver.inputs.utils.follows = "flake-utils";
   };
 
   outputs = {
     self,
     nixpkgs,
     nixpkgs-unstable,
-    nixpkgs-anubis,
     nixpkgs-graalvm-oracle-23,
     flake-utils,
     ...
@@ -58,14 +54,6 @@
 
     mkOverlays = system: [
       inputs.agenix.overlays.default
-
-      (final: prev: let
-        anubis = import nixpkgs-anubis {
-          inherit system;
-        };
-      in {
-        inherit (anubis) anubis;
-      })
 
       (final: prev: let
         unstable = import nixpkgs-unstable {
@@ -80,6 +68,7 @@
         inherit
           (unstable)
           alejandra
+          anubis
           grafana
           jre21_minimal
           loki
