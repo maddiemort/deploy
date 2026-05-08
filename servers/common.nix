@@ -1,9 +1,4 @@
-{
-  pkgs,
-  system,
-  mkOverlays,
-  ...
-}: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     neovim
   ];
@@ -34,11 +29,6 @@
     ../keys/maddie-wtf.pub
     ../keys/maddiemort-deploy.pub
   ];
-
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = mkOverlays system;
-  };
 
   # Reject HTTP requests to the root. This in particular also prevents requests to domains with
   # stale DNS records that still point to a server from succeeding even if there's no active virtual

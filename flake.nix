@@ -55,17 +55,28 @@
     inherit (nixpkgs.lib) nixosSystem;
     inherit (flake-utils.lib) eachDefaultSystem;
 
+    config = {
+      allowUnfree = true;
+
+      # There is a security warning about this package (used by Jitsi Meet, which is set up in
+      # combination with Zulip) due to a potential issue in an upstream cryptography library. This
+      # is not a concern for this service, so we're permitting the insecure package to be built.
+      #
+      # Flake input updates will likely require the version number here to be updated.
+      permittedInsecurePackages = [
+        "jitsi-meet-1.0.8792"
+      ];
+    };
+
     mkOverlays = system: [
       inputs.agenix.overlays.default
 
       (final: prev: let
         unstable = import nixpkgs-unstable {
-          inherit system;
-          config.allowUnfree = true;
+          inherit config system;
         };
         graalvm-oracle-23 = import nixpkgs-graalvm-oracle-23 {
-          inherit system;
-          config.allowUnfree = true;
+          inherit config system;
         };
       in {
         inherit
@@ -73,12 +84,16 @@
           alejandra
           anubis
           grafana
+          jitsi-excalidraw
+          jitsi-meet
+          jitsi-meet-prosody
           jre21_minimal
           loki
           minecraftServers
           # nix
           prometheus
           prometheus-node-exporter
+          # prosody
           tempo
           terraria-server
           ;
@@ -113,16 +128,23 @@
       })
     ];
 
-    mkSystem = system: config:
+    mkPkgs = system:
+      import nixpkgs {
+        inherit config system;
+        overlays = mkOverlays system;
+      };
+
+    mkSystem = system: module:
       nixosSystem {
         inherit system;
+        pkgs = mkPkgs system;
         modules = [
           inputs.agenix.nixosModules.age
-          config
+          module
           ./servers/common.nix
         ];
         specialArgs = {
-          inherit inputs mkOverlays system;
+          inherit inputs;
           modules =
             self.nixosModules
             // {
@@ -163,11 +185,7 @@
       };
     }
     // eachDefaultSystem (system: let
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        overlays = mkOverlays system;
-      };
+      pkgs = mkPkgs system;
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [

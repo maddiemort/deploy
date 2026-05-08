@@ -113,7 +113,7 @@
     };
 
     jitsi = {
-      enable = false;
+      enable = true;
       hostname = "meet.maddie.wtf";
     };
   };

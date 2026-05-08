@@ -350,18 +350,17 @@ in {
       services.jitsi-meet = {
         enable = true;
         nginx.enable = true;
+        secureDomain.enable = true;
+        prosody.lockdown = true;
 
         hostName = cfg.jitsi.hostname;
-      };
 
-      # There is a security warning about this package due to a potential issue in an upstream
-      # cryptography library. This is not a concern for this service, so we're permitting the
-      # insecure package to be built.
-      #
-      # Flake input updates will likely require the version number here to be updated.
-      nixpkgs.config.permittedInsecurePackages = [
-        "jitsi-meet-1.0.7952"
-      ];
+        config = {
+          hosts = {
+            anonymousdomain = "guest.${cfg.jitsi.hostname}";
+          };
+        };
+      };
 
       security.acme.certs."${cfg.jitsi.hostname}".email = cfg.adminEmail;
     })
