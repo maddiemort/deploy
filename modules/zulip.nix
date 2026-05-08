@@ -244,7 +244,7 @@ in {
         };
 
         rabbitmq = {
-          image = "rabbitmq:4.0.7";
+          image = "rabbitmq:4.1";
           hostname = "rabbitmq";
 
           environment = {
@@ -290,20 +290,20 @@ in {
             "redis"
           ];
 
-          image = "immortalvision/zulip-arm:10.1-0";
+          image = "ghcr.io/zulip/zulip-server:12.0-0";
 
           ports = [
+            "3625:25"
             "3680:80"
             "36443:443"
           ];
 
           environment = mkMerge [
             {
-              DB_HOST = "database";
-              DB_HOST_PORT = "5432";
-              DB_USER = "zulip";
+              CONFIG_postgresql__database_user = "zulip";
+
               LOADBALANCER_IPS = "157.90.147.15";
-              SSL_CERTIFICATE_GENERATION = "self-signed";
+              CERTIFICATES = "self-signed";
               ZULIP_AUTH_BACKENDS = "EmailAuthBackend";
 
               SETTING_ADD_TOKENS_TO_NOREPLY_ADDRESS = "True";
@@ -324,8 +324,10 @@ in {
               SETTING_PASSWORD_MIN_LENGTH = "20";
               SETTING_RABBITMQ_HOST = "rabbitmq";
               SETTING_REDIS_HOST = "redis";
+              SETTING_REMOTE_POSTGRES_HOST = "database";
+              SETTING_REMOTE_POSTGRES_PORT = "5432";
               SETTING_ZULIP_ADMINISTRATOR = cfg.adminEmail;
-              SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS = "False";
+              SETTING_ZULIP_SERVICE_PUSH_NOTIFICATIONS = "True";
             }
 
             (mkIf cfg.jitsi.enable {
