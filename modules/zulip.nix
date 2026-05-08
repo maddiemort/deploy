@@ -350,16 +350,9 @@ in {
       services.jitsi-meet = {
         enable = true;
         nginx.enable = true;
-        secureDomain.enable = true;
         prosody.lockdown = true;
 
         hostName = cfg.jitsi.hostname;
-
-        config = {
-          hosts = {
-            anonymousdomain = "guest.${cfg.jitsi.hostname}";
-          };
-        };
       };
 
       security.acme.certs."${cfg.jitsi.hostname}".email = cfg.adminEmail;
